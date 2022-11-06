@@ -9,6 +9,11 @@ Group project for ENGG1340/COMP2113
 ### Game rules
 
 ## Features implemented
+* Generation of random game sets or events
+* Data structures for storing game status
+* Dynamic memory management
+* File I/O (e.g. for loading or saving game status)
+* Program codes in multiple files
 
 ## List of non-standard C/C++ libraries included
 
