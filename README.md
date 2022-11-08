@@ -10,7 +10,7 @@ Pac-Man, originally called Puck Man in Japan, is a legendary and classic maze ac
 ### Game rules
 
 1. The player starts the game by entering the character "s" in the terminal.
-2. The action of the Pac-Man is controlled using WASD keys. Press W to move upward, A to move downward, S to move left and D to move right. The player may pause the game by pressing P.
+2. The action of the Pac-Man is controlled using WASD keys. Press W to move upward, A to move downward, S to move left and D to move right.
 3. Consuming a dot will grant the player 10 points, while consuming the power pellets, which are the large flashing dots, turns the ghosts blue for 10 seconds for Level 1 and make them edible for 200 points each. Extra points will be given (double the points of the most recently eaten ghost) if ghosts are eaten in succession.
 4. Bonus fruit may appear and counts for 50 points when eaten.
 5. The player is brought to the next level when all dots on the maze are eaten, where difficulty is raised: the ghosts move faster, and the power pellets' effect lasts shorter.
