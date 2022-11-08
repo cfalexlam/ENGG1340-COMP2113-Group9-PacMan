@@ -1,7 +1,7 @@
 # ENGG1340-COMP2113-Pacman
 Group project for ENGG1340/COMP2113 
 
-## Team members
+## Team members (Group 9)
 
 ## About the game
 
