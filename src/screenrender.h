@@ -16,8 +16,8 @@ class ScreenRenderer{
         void printPlayerStatus(Player p);
 
         void takeCmdInput(string s);
-        void takeKeyboardInput();
-        void takeKeyboardInputNB();
+        void KeyboardMode();
+        void CmdMode();
 };
 
 #endif
