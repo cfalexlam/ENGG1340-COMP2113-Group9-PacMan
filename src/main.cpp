@@ -1,6 +1,5 @@
 #include <cstdlib>
 #include <ncurses.h> // need to add "-lncurses" at last when compile
-#include <conio.h>
 #include <iostream>
 
 #include "player.h"
@@ -18,7 +17,7 @@ void MainGame::mainLoop(){
     // Set random seed
     srand(time(NULL));
 
-    ScreenRenderer s;
+    ScreenRenderer s;	
 
     s.printStartMenu();
 
@@ -28,8 +27,11 @@ void MainGame::mainLoop(){
 
     s.takeCmdInput("Hi " + p.getName() + "! Are you ready? (Press any key to continue)");
     
-    s.KeyboardMode();
+    s.KeyboardModeOpen();
+	s.KeyboardModeWb();
     getch();
+	s.KeyboardModeNb();
+	
     while(1){
         m.printmaze();
         int input;
@@ -37,19 +39,29 @@ void MainGame::mainLoop(){
         switch(input)
         {
             case KEY_UP:
+                m.p.moveup();
+                break;
             case KEY_DOWN;
+                m.p.movedown;
+                break;
             case KEY_LEFT;
+                m.p.moveleft();
+                break;
             case KEY_RIGHT;
+                m.p.moveright();
+                break;
             case int('q');
         }
+		
         // check collisions of ghosts and pacman before updating the screen
         if (isLosing(m)){
             pl.loseLife();
             if (pl.getLives == 0){
                 s.printLoseScreen(pl.getScore());
-                if (s.takeKeyboardInput()){
-                    exit();
-                }
+				s.KeyboardModeWb();
+				getch();
+				s.KeyboardModeClose();
+                exit();
             }
             m.respawn(); // restore the starting positions of ghosts and pacman, while keeping the dots at their current places
             s.printRespawnCountdown(); // countdown for 3 seconds before restarting the game
