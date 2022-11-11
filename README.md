@@ -7,7 +7,7 @@ Group project for ENGG1340/COMP2113
 
 Pac-Man, originally called Puck Man in Japan, is a legendary and classic maze action video game which was developed and released in the 1980s. To score, a player controls the "Pac-Man" to move inside an enclosed maze filled up with dots and "eats" all the dots. There are four ghosts patroling freely inside the maze, and that the players have to avoid them while eating up the dots. Eating the large flashing dots (also called the power pellet) turns the ghosts into a benign state, where additional scores are given when Pac-Man eats them up.
 
-### Game rules
+## Game rules
 
 1. The player starts the game by entering his name in the terminal.
 2. The action of the Pac-Man is controlled using WASD keys. Press W to move upward, A to move downward, S to move left and D to move right.
