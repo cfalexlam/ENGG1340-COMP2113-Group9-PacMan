@@ -1,4 +1,5 @@
 #include <cstdlib>
+#include <ncurses.h> // need to add "-lncurses" at last when compile
 #include <conio.h>
 #include <iostream>
 
@@ -26,11 +27,21 @@ void MainGame::mainLoop(){
     Maze m(s.takeCmdInput("Please enter the filename of the maze: "));
 
     s.takeCmdInput("Hi " + p.getName() + "! Are you ready? (Press any key to continue)");
-
-    do{
-        char input;
-        input = s.takeKeyboardInput();
-
+    
+    s.KeyboardMode();
+    getch();
+    while(1){
+        m.printmaze();
+        int input;
+        input = getch();
+        switch(input)
+        {
+            case KEY_UP:
+            case KEY_DOWN;
+            case KEY_LEFT;
+            case KEY_RIGHT;
+            case int('q');
+        }
         // check collisions of ghosts and pacman before updating the screen
         if (isLosing(m)){
             pl.loseLife();
@@ -47,9 +58,9 @@ void MainGame::mainLoop(){
         m.updatePos(); // update the positions of dots, ghosts and pacman
         m.updateStates(); // update the states of ghosts and pacman
         pl.updatePlayerScore();  // increase the player's score if a dot is eaten
-        s.updateScreen();  // print new maze to screen
+        clear();
     }
-    while (input != "q" || input != "Q")
+
 
 }
 
