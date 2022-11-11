@@ -6,3 +6,9 @@ void ScreenRenderer::takeKeyboardInput(){
     else
         return -1;
 }
+
+string ScreenRenderer::takeCmdInput(string message){
+    cout << message << endl;
+    cin >> x;
+    return x
+}
