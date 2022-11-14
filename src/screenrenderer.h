@@ -9,6 +9,7 @@ class Player;
 class ScreenRenderer{
     public:
         void printLinesToScreen(string s);
+        void printFile(const std::string& filename);
         void printStartMenu();
         void printPauseMenu();
         void printRespawnCountdown();
