@@ -24,3 +24,37 @@ string ScreenRenderer::takeCmdInput(string message){
     return x
 }
 
+void ScreenRenderer::printFile(const std::string& fileName) {
+  std::ifstream fin(fileName);
+  std::string line;
+  while (std::getline(fin, line))
+    std::cout << line << std::endl;
+  fin.close();
+}
+
+void ScreenRenderer::printStartMenu() {
+  system("cls");
+
+  printFile("welcome.txt");
+
+  printFile("command.txt");
+
+  char input;
+  while (std::cin >> input) {
+    switch (input) {
+      case 'p':
+        return;
+
+      case 'q':
+        exit(0);
+
+      case 'r':
+        printFile("gamerule.txt");
+        std::cout << "Please enter the next command (p/r/q)" << std::endl;
+        break;
+
+      default:
+        std::cout << "Invalid command. Please try again." << std::endl;
+    }
+  }
+}
