@@ -37,7 +37,7 @@ void ScreenRenderer::printFile(const std::string& fileName) {
 }
 
 void ScreenRenderer::printStartMenu() {
-  system("cls");
+  system("clear");
 
   printFile("welcome.txt");
 
