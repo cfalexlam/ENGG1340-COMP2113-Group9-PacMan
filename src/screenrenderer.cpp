@@ -1,3 +1,7 @@
+#include "screenrenderer.h"
+#include <iostream>
+#include <fstream>
+
 // Receive and convert keyboard input into move and decide further actions
 void ScreenRenderer::KeyboardModeOpen(){ // in keyboardmode, use printw(mystring.c_str()) instead of cout<< mystring
     initscr(); //initialize screen
