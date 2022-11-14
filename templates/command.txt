@@ -1,0 +1,4 @@
+Please enter a command (p/r/q)
+p: start a new game
+r: read game rules
+q: exit game
