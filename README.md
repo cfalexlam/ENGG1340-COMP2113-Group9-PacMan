@@ -7,7 +7,7 @@ Group project for ENGG1340/COMP2113
 
 Pac-Man, originally called Puck Man in Japan, is a legendary and classic maze action video game which was developed and released in the 1980s. To score, a player controls the "Pac-Man" to move inside an enclosed maze filled up with dots and "eats" all the dots. There are four ghosts patroling freely inside the maze, and that the players have to avoid them while eating up the dots. Eating the large flashing dots (also called the power pellet) turns the ghosts into a benign state, where additional scores are given when Pac-Man eats them up.
 
-### Game rules
+## Game rules
 
 1. The player starts the game by entering his name in the terminal.
 2. The action of the Pac-Man is controlled using WASD keys. Press W to move upward, A to move downward, S to move left and D to move right.
@@ -18,11 +18,25 @@ Pac-Man, originally called Puck Man in Japan, is a legendary and classic maze ac
 
 
 ## Features implemented
-* Generation of random game sets or events
-* Data structures for storing game status
-* Dynamic memory management
-* File I/O (e.g. for loading or saving game status)
-* Program codes in multiple files
+1.  Generation of random game sets or events
+    * Power pellets are randomly generated on the maze using random seeds
+
+2.  Data structures for storing game status
+    * Custom classes are implemented to partition the program into smaller bits and bundling functional parts together for modularization and effective problem solving.
+        1. The player's status is represented by the Player class.
+        2. The pacman and ghosts states are represented by the Pacman and Ghost classes respectively.
+        3. MainGame, ScreenRenedrer and Map exist as utility classes that constitute the core game logic and functions.
+
+3.  Dynamic memory management
+    * Vectors are used in the maze class to store the positions of the pacman, ghosts and walls.
+    * A dynamically allocated integer array is used to store the player's scores in each difficulty level.
+
+4.  File I/O (e.g. for loading or saving game status)
+    * For file input, text files which contain the structure of the maze is loaded during initialization of the game. A player can also choose to load exisiting saves.
+    * For file output, when the player quits the game, his current game status will be output to a text file. 
+
+5.  Program codes in multiple files
+    * The program's code is partitioned into multiple .cpp and header files, according to classes.
 
 ## List of non-standard C/C++ libraries included
 
