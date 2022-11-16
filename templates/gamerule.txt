@@ -1,0 +1,7 @@
+-----------------------------------------------------
+                    Game rule
+1. Control the Pac-Man to consume all dots!
+2. Use WASD to change the direction of the Pac-Man.
+3. You lose 1 live if you are caught by the ghost.
+4. You have totally 3 lives.
+-----------------------------------------------------
