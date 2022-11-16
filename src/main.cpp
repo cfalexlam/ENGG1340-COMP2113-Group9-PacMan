@@ -70,7 +70,6 @@ void MainGame::mainLoop(){
             s.printRespawnCountdown(); // countdown for 3 seconds before restarting the game
         }
 
-<<<<<<< HEAD
         m.updatePos(); // update the positions of dots, ghosts and pacman on the maze
         m.updateStates(); // update the states of ghosts and pacman on the maze
         pl.updateScore();  // increase the player's score if a dot is eaten
@@ -82,12 +81,6 @@ void MainGame::mainLoop(){
         }
 
         s.updateScreen();  // print new maze to screen
-=======
-        m.updatePos(); // update the positions of dots, ghosts and pacman
-        m.updateStates(); // update the states of ghosts and pacman
-        pl.updatePlayerScore();  // increase the player's score if a dot is eaten
-        clear();
->>>>>>> 9703fe38767a3188ec7ce80616ffda8fb1585d72
     }
 
 
