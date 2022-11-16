@@ -2,19 +2,15 @@
 #define PACMAN
 
 
-class PACMAN{
+class Pacman{
   public:
-  
-    void initpacman();
-    void moveup();
-    void movedown();
-    void moveleft();
-    void moveright();
-    int getXvelocity();
-    int getYvelocity();
+    void changeDirection(int x,int y);
+    int* getVelocity();
+    int* getPosition();
+    Pacman(int spawnX, int spawnY);
   private:
-    int currentX,currentY;
-    int xVelocity=0,yVelocity=0;
+    int* position;
+    int* velocity;
   
 };
 #endif
