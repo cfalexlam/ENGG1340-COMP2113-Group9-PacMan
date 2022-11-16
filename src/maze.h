@@ -19,9 +19,9 @@ class Maze{
         Ghost clyde;
 
         Pacman p;
-
+    
         // load maze from templates
-        void loadMaze(str filename);
+        Maze(string filename);
 
         // restart the game while keeping the dots; respawn the ghosts and pacman at their spawnpoints
         void respawn();
