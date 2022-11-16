@@ -1,38 +1,23 @@
 #include <pacman.h>
 
 
-
-int pacman::getXVelocity()
+Pacman::Pacman(int spawnX, int spawnY){
+  this->postion[0] = spawnX;
+  this->postion[1] = spawnY;
+}
+int* Pacman::getVelocity()
 {
-  return this->xVelocity;
+  return this->velocity;
 }
 
-int pacman::getYVelocity()
+int* Pacman::getPosition()
 {
-  return this->yVelocity;
+  return this->position;
 }
 
-void pacman::moveup()
-{
-  this->xVelocity = 0;
-  this->yVelocity = -1;
+void Pacman::changeDirection(int x , int y){
+  this->velocity[0] = x;
+  this->velocity[1] = y;
 }
 
-void pacman::movedown()
-{
-  this->xVelocity = 0;
-  this->yVelocity = 1;
-}
-
-void pacman::moveleft()
-{
-  this->xVelocity = -1;
-  this->yVelocity = 0;
-}
-
-void pacman::moveright()
-{
-  this->xVelocity = 1;
-  this->yVelocity = 0;
-}
 
