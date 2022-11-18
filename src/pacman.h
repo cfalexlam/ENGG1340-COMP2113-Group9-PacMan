@@ -4,9 +4,9 @@
 
 class Pacman{
   public:
-    Pacman(int spawnX, int spawnY);
-    void setVelocity(int x,int y);
-    void setPosition(int x,int y);
+    Pacman(int spawnRow, int spawnCol);
+    void setVelocity(int row,int col);
+    void setPosition(int row,int col);
     int* getVelocity();
     int* getPosition();
     
