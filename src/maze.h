@@ -19,7 +19,11 @@ class Maze{
         Ghost clyde;
 
         Pacman p;
-    
+        bool isWall(int row,int col);
+        bool isGhost(int row,int col);
+        bool isFood(int row,int col);
+        void Maze::movePacman(int row,int col, int nrow,int ncol);
+        int foodLeft();
         // load maze from templates
         Maze(string filename);
 
@@ -31,6 +35,8 @@ class Maze{
 
         // update states of entities
         void updateStates();
+    private:
+        int food=0;
 };
 
 #endif
