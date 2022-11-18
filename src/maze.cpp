@@ -21,35 +21,44 @@ Maze::Maze(string filename){
   while (getline(fin,line))
   {
     vector<char> temp;
-    this->maze.push_back(temp);
+    maze.push_back(temp);
     for (int j=0;j<line.size();j++)
-    	if (line[j]==WALL)
-        	this->maze[i][j].push_back(WALL);
-    	else if (i == this-p->getPostion[0] and j == this-p->getPostion[1])
-        	this->maze[i][j].push_back(PLAYER);
+    	if ( line[j] == WALL)
+        	maze[i][j].push_back(WALL);
+    	else if (i == p->getPostion[0] and j == p->getPostion[1])
+        	maze[i][j].push_back(PLAYER);
      	else 
-        	this->maze[i][j].push_back(FOOD);
+        	maze[i][j].push_back(FOOD);
+	  		food+=1;
     i+=1;
   }
 }
 
 void Maze::printMaze(){
-	for (int i=0;i<this->maze.size();i++)
-		for (int j=0;j<this->maze[0].size();j++)
-			printw("%c",maze[i][j]);
+	for (int row=0;row<maze.size();row++)
+		for (int col=0;col<maze[0].size();col++)
+			printw("%c ",maze[row][col]);
+}
+int Maze::foodLeft(){
+	return food;
+}
+void Maze::movePacman(int row,int col, int nrow,int ncol)
+{
+	maze[row][col] = SPACE;
+	maze[nrow][ncol] = PLAYER;
 }
 
-bool Maze::isWall(int x,int y)
+bool Maze::isWall(int row,int col)
 {
-	return this-> maze[x][y]==WALL;
+	return maze[row][col] == WALL;
 }
 
-bool Maze::isGhost(int x,int y)
+bool Maze::isGhost(int row,int col)
 {
-	return this-> maze[x][y]==GHOST;
+	return maze[row][col] == GHOST;
 }
 
-bool Maze::isFood(int x,int y)
+bool Maze::isFood(int row,int col)
 {
-	return this-> maze[x][y]==FOOD;
+	return maze[row][col] == FOOD;
 }
