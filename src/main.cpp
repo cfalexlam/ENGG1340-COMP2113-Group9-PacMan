@@ -8,7 +8,6 @@
 #include "screenrenderer.h"
 #include "ghosts.h"
 #include "dots.h"
-#include "player.h"
 
 void MainGame::mainLoop(){
     /*
@@ -25,12 +24,11 @@ void MainGame::mainLoop(){
     Player pl(s.takeCmdInput("Please enter your name: "));
 
     Maze m(s.takeCmdInput("Please enter the filename of the maze: "));
-    Pacman p;
     s.takeCmdInput("Hi " + p.getName() + "! Are you ready? (Press any key to continue)");
     s.KeyboardModeOpen();
-    s.KeyboardModeWb();
+    s.KeyboardModeWB();
     getch();
-    s.KeyboardModeNb();
+    s.KeyboardModeNB();
 	
     while(1){
         m.printmaze();
@@ -52,39 +50,40 @@ void MainGame::mainLoop(){
             case KEY_RIGHT;
                 p.setVelocity(0,1);
                 break;
-        }
-		
-        // check collisions of ghosts and pacman before updating the screen
-        if (isLosing(m)){
-            pl.loseLife();
-
-            if (pl.getLives == 0){
-                s.printLoseScreen(pl.getScore());
-				s.KeyboardModeWb();
-				getch();
-				s.KeyboardModeClose();
-                exit();
-            }
-
-            m.respawn(newLevel=false); // restore the starting positions of ghosts and pacman, while keeping the dots at their current places
-            s.printRespawnCountdown(); // countdown for 3 seconds before restarting the game
-        }
+        }      
 		
 		if (! m.isWall(p.getPosition()[0]+p.getVelocity()[0],p.getPosition()[1]+p.getVelocity()[1]))
 		{
-			if(m.isFood(p.getPosition()[0]+p.getVelocity()[0],p.getPosition()[1]+p.getVelocity()[1]))
+			if (m.isGhost(p.getPosition()[0]+p.getVelocity()[0],p.getPosition()[1]+p.getVelocity()[1])) // check collisions of ghosts and pacman
 			{
-				p1.updateScore(); // increase the player's score if a dot is eaten
+				pl.loseLife();
+				if (pl.getLives == 0)
+				{
+					s.printLoseScreen(pl.getScore());
+					s.KeyboardModeWb();
+					getch();
+					s.KeyboardModeClose();
+					exit();
+				}
+				 m.respawn(newLevel=false); // restore the starting positions of ghosts and pacman, while keeping the dots at their current places
+            	 s.printRespawnCountdown(); // countdown for 3 seconds before restarting the game
+            }
+			else
+			{
+				if (m.isFood(p.getPosition()[0]+p.getVelocity()[0],p.getPosition()[1]+p.getVelocity()[1]))
+				{
+					p1.updateScore(); // increase the player's score if a dot is eaten
+				}
+				m.movepacman();
+				p.setPosition( p.getPosition()[0]+p.getVelocity()[0] , p.getPosition()[1]+p.getVelocity()[1] );
 			}
-			m.movepacman();
-			p.setPosition( p.getPosition()[0]+p.getVelocity()[0] , p.getPosition()[1]+p.getVelocity()[1] );
-		
 		}
 		
         m.updatePos(); // update the positions of dots, ghosts and pacman on the maze
         m.updateStates(); // update the states of ghosts and pacman on the maze
 
-        if (!m.getDotsPos()){
+        if (!m.getDotsPos())
+		{
             pl.updateCurrentLevel();
             m.respawn(newLevel=true);
             s.printRespawnCountdown();
