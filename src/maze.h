@@ -1,5 +1,5 @@
-#ifndef MAZE
-#define MAZE
+#ifndef MAZE_H
+#define MAZE_H
 
 #include <vector>
 #include <string>
