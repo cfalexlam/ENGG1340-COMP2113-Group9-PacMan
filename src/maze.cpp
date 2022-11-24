@@ -23,8 +23,7 @@ Maze::Maze(string filename) {
 
   getline(fin, line); //read in the pacman position
   linein.str(line);
-  linein >> row;
-  linein >> col;
+  linein >> row >> col;
   p.setPosition(stoi(row), stoi(col));
   linein.clear();
 
@@ -32,9 +31,11 @@ Maze::Maze(string filename) {
   for (int i = 0, j = stoi(line); i < j; i++) {
     getline(fin, line);
     linein.str(line);
-    linein >> row;
-    linein >> col;
-    //set position of  ghost
+    linein >> row >> col;
+   
+    Ghost ghost;   //set position of  ghost
+    ghost.setPosition(stoi(row),stoi(col));
+    ghosts.push_back(ghost);
     linein.clear();
   }
 
@@ -42,9 +43,11 @@ Maze::Maze(string filename) {
   for (int i = 0, j = stoi(line); i < j; i++) {
     getline(fin, line);
     linein.str(line);
-    linein >> row;
-    linein >> col;
-    //set position of power pellets
+    linein >> row >> col;
+    
+    Pellet pellet;   //set position of power pellets
+    pellet.setPosition(stoi(row),stoi(col));
+    pellets.push_back(pellet);
     linein.clear();
   }
 
@@ -53,22 +56,27 @@ Maze::Maze(string filename) {
     vector < char > temp;
     maze.push_back(temp);
     for (int j = 0; j < line.size(); j++)
-
       if (line[j] == WALL)
-        maze[i][j].push_back(WALL);
-
-      else if (i == p.getPostion[0] and j == p.getPostion[1])
-      maze[i][j].push_back(PLAYER);
-
-    else if ()
-
-    else if ()
-
-    else
-      maze[i][j].push_back(FOOD);
-    food += 1;
+        maze[i].push_back(WALL);
+      else
+      {
+        maze[i].push_back(FOOD);
+        food += 1;
+      }
     i += 1;
   }
+  for (int i=0;i<pellets.size();i++)
+  {
+    maze[pellets[i].getPosition()[0]][pellets[i].getPosition()[1]] = PELLET;
+    food -= 1;
+  }
+  for (int i=0;i<ghosts.size();i++)
+  {
+    maze[ghosts[i].getPosition()[0]][ghosts[i].getPosition()[1]] = GHOST;
+    fodd -= 1;
+  }
+  maze[pacman.getPosition()[0]][pacman.getPosition()[1]] = PLAYER;
+  food -= 1;
 }
 
 void Maze::printMaze() {
