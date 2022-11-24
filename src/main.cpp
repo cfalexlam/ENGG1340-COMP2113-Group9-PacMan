@@ -36,13 +36,13 @@ void MainGame::mainLoop(){
         m.printmaze();
         int input;
         input = getch();
-        switch(input)
+        switch(input) 
         {
             case KEY_UP:
-                m.p.moveup();
+                m.p.moveup(); // Alex: check losing before making the move? also have to reject invalid moves (collision with walls)
                 break;
             case KEY_DOWN;
-                m.p.movedown;
+                m.p.movedown();
                 break;
             case KEY_LEFT;
                 m.p.moveleft();
@@ -54,7 +54,7 @@ void MainGame::mainLoop(){
         }
 		
         // check collisions of ghosts and pacman before updating the screen
-        if (isLosing(m)){
+        if (isLosing(m, input)){
 
             pl.loseLife();
 
@@ -66,17 +66,20 @@ void MainGame::mainLoop(){
                 exit();
             }
 
-            m.respawn(newLevel=false); // restore the starting positions of ghosts and pacman, while keeping the dots at their current places
+            m.respawn(false); // restore the starting positions of ghosts and pacman, while keeping the dots at their current places
             s.printRespawnCountdown(); // countdown for 3 seconds before restarting the game
         }
 
+        if (eatingPowerPellet()){
+            m.updateStates();
+        }
+
         m.updatePos(); // update the positions of dots, ghosts and pacman on the maze
-        m.updateStates(); // update the states of ghosts and pacman on the maze
         pl.updateScore();  // increase the player's score if a dot is eaten
 
         if (!m.getDotsPos()){
             pl.updateCurrentLevel();
-            m.respawn(newLevel=true);
+            m.respawn(true);
             s.printRespawnCountdown();
         }
 
@@ -88,7 +91,25 @@ void MainGame::mainLoop(){
 
 
 // Check if lose state is reached with the planned move, proceed otherwise
-bool MainGame::isLosing(Maze m){
+bool MainGame::isLosing(Maze m, int input){
     /* Check if there are any collisions in the position of ghosts and pacman with the keyboard input*/
+    int newPacmanPosX = m.p.currentX;
+    int newPacmanPosY = m.p.currentY;
+    
+    if (input == KEY_UP){
+        newPacmanPosY -= 1;
+    }
+    else if (input == KEY_DOWN){
+        newPacmanPosY += 1;
+    }
+    else if (input == KEY_LEFT){
+        newPacmanPosX -= 1;
+    }
+    else if (input == KEY_RIGHT){
+        newPacmanPosX += 1;
+    }
 
+    if (m.p.currentX == m.&& m.p.currentY == ){
+
+    }
 }

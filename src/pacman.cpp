@@ -2,35 +2,35 @@
 
 
 
-int pacman::getXVelocity()
+int Pacman::getXVelocity()
 {
   return this->xVelocity;
 }
 
-int pacman::getYVelocity()
+int Pacman::getYVelocity()
 {
   return this->yVelocity;
 }
 
-void pacman::moveup()
+void Pacman::moveUp()
 {
   this->xVelocity = 0;
   this->yVelocity = -1;
 }
 
-void pacman::movedown()
+void Pacman::moveDown()
 {
   this->xVelocity = 0;
   this->yVelocity = 1;
 }
 
-void pacman::moveleft()
+void Pacman::moveLeft()
 {
   this->xVelocity = -1;
   this->yVelocity = 0;
 }
 
-void pacman::moveright()
+void Pacman::moveRight()
 {
   this->xVelocity = 1;
   this->yVelocity = 0;

@@ -5,11 +5,11 @@
 class PACMAN{
   public:
   
-    void initpacman();
-    void moveup();
-    void movedown();
-    void moveleft();
-    void moveright();
+    void initPacman();
+    void moveUp();
+    void moveDown();
+    void moveLeft();
+    void moveRight();
     int getXvelocity();
     int getYvelocity();
   private:
