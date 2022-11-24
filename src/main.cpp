@@ -63,7 +63,7 @@ void MainGame::mainLoop() {
                 break;
         }
 
-        /// Check if pacman is hitting a wall
+        /// Check if pacman is going to hit a wall
         if (!m.isWall(p.getPosition()[0] + p.getVelocity()[0], p.getPosition()[1] + p.getVelocity()[1])) {
             // Check collisions of ghosts and pacman
             if (m.isGhost(p.getPosition()[0] + p.getVelocity()[0], p.getPosition()[1] + p.getVelocity()[1])) {
