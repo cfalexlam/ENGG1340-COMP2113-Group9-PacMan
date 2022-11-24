@@ -1,38 +1,25 @@
 #include <pacman.h>
 
-
-
-int Pacman::getXVelocity()
+void Pacman::setPosition(int row , int col)
 {
-  return this->xVelocity;
+  this->postion[0] = row;
+  this->postion[1] = col;
 }
 
-int Pacman::getYVelocity()
-{
-  return this->yVelocity;
+void Pacman::setVelocity(int row , int col){
+  this->velocity[0] = row;
+  this->velocity[1] = col;
 }
 
-void Pacman::moveUp()
+int* Pacman::getVelocity()
 {
-  this->xVelocity = 0;
-  this->yVelocity = -1;
+  return this->velocity;
 }
 
-void Pacman::moveDown()
+int* Pacman::getPosition()
 {
-  this->xVelocity = 0;
-  this->yVelocity = 1;
+  return this->position;
 }
 
-void Pacman::moveLeft()
-{
-  this->xVelocity = -1;
-  this->yVelocity = 0;
-}
 
-void Pacman::moveRight()
-{
-  this->xVelocity = 1;
-  this->yVelocity = 0;
-}
 

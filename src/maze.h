@@ -1,5 +1,5 @@
-#ifndef MAZE
-#define MAZE
+#ifndef MAZE_H
+#define MAZE_H
 
 #include <vector>
 #include <string>
@@ -14,14 +14,19 @@ class Maze{
     public:
         Maze();
         
+        Ghost inky;
+        Ghost blinky;
+        Ghost pinky;
+        Ghost clyde;
+
+        Pacman p;
+        bool isWall(int row,int col);
+        bool isGhost(int row,int col);
+        bool isFood(int row,int col);
+        void Maze::movePacman(int row,int col, int nrow,int ncol);
+        int foodLeft();
         // load maze from templates
-        int loadMaze(std::string filename);
-
-        // intialize a vector that stores the coordinates of dots
-        int initDotsVector();
-
-        // remove dots from maze and dots when eaten
-        int removeDots(int x, int y);
+        Maze(string filename);
 
         // restart the game while keeping the dots; respawn the ghosts and pacman at their spawnpoints
         void respawn(bool newLevel);
@@ -31,21 +36,8 @@ class Maze{
 
         // update states of entities
         void updateStates();
-
     private:
-        Ghost clyde = new Ghost(1, 37); 
-        Ghost inky = new Ghost(3, 37); 
-        Ghost blinky = new Ghost(5, 37); 
-        Ghost pinky = new Ghost(7, 37); 
-
-        Pacman pacman = new Pacman(1, 1);
-
-        const int ROWNUMBER = 9;
-        const int COLNUMBER = 51;
-
-        std::vector<vector<int>> maze;  // store positions of walls, dots and power pellets
-        std::vector<tuple<int, int>> dots;  // store coordinates of dots
-        std::vector<tuple<int, int>> powerpellets;  // store coordinates of power pellets
+        int food=0;
 };
 
 #endif

@@ -6,18 +6,19 @@
 void ScreenRenderer::KeyboardModeOpen(){ // in keyboardmode, use printw(mystring.c_str()) instead of cout<< mystring
     initscr(); //initialize screen
     noecho(); // no input display
-}
-void ScreenRenderer::KeyboardModeWb(){
-    nodelay(stdscr,false); /* Takes keyboard input with blocking or delay */
-    keypad(stdscr,false) // not allow arrow key
-}
-void ScreenRenderer::KeyboardModeNb(){
-    nodelay(stdscr,true); /* Takes keyboard input without blocking or delay */
     keypad(stdscr,true) // allow arrow key
 }
+void ScreenRenderer::KeyboardModeWB(){
+    nodelay(stdscr,false); /* Takes keyboard input with blocking or delay */
+}
+void ScreenRenderer::KeyboardModeNB(){
+    nodelay(stdscr,true); /* Takes keyboard input without blocking or delay */
+}
 void ScreenRenderer::KeyboardModeClose(){
+    echo();
     endwin();
 }
+
 void ScreenRenderer::KeyboardModePrint(string str){
     printw(str.c_str());
 }

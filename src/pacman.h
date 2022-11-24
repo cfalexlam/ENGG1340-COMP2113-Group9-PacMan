@@ -1,20 +1,18 @@
-#ifndef PACMAN
-#define PACMAN
+#ifndef PACMAN_H
+#define PACMAN_H
 
 
-class PACMAN{
+class Pacman{
   public:
+    void setVelocity(int row,int col);
+    void setPosition(int row,int col);
+    int* getVelocity();
+    int* getPosition();
+    
   
-    void initPacman();
-    void moveUp();
-    void moveDown();
-    void moveLeft();
-    void moveRight();
-    int getXvelocity();
-    int getYvelocity();
   private:
-    int currentX,currentY;
-    int xVelocity=0,yVelocity=0;
+    int* position;
+    int* velocity;
   
 };
 #endif
