@@ -1,15 +1,28 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-
-class PLAYER{
+class Player{
     public:
-        vector<int> getScore();
-        vector<int> updateScore();
-        vector<int> updateLevel();
+        Player(char* name);
+
+        // score manipulation
+        int getScore();
+        void addScore(int increment);
+
+        // level manipulation
+        int getLevel();
+        void addLevel();
+
+        // lives manipulation
+        int getLives();
+        void loseLife();
     private:
-        int currentLevel = 1;
-        int *score = new int[currentLevel];
+        int level;
+        int lives;
+        int* score;
+        int scoreSum;
+
+        char* name;
 };
 
 #endif

@@ -1,43 +1,25 @@
-#include <Ghost.h>
+#include <ghost.h>
 
-Ghost::Ghost(int initX, int initY, int xVelocity, int yVelocity){
-    initX = initX;
-    initY = initY;
-    xVelocity = xVelocity;
-    yVelocity = yVelocity;
-}
-
-int Ghost::getXVelocity()
+void Ghost::setPosition(int row, int col)
 {
-  return this->xVelocity;
+  this->position[0] = row;
+  this->position[1] = col;
 }
 
-int Ghost::getYVelocity()
-{
-  return this->yVelocity;
+void Ghost::setVelocity(int row, int col){
+  this->velocity[0] = row;
+  this->velocity[1] = col;
 }
 
-void Ghost::moveUp()
+int* Ghost::getVelocity()
 {
-  this->xVelocity = 0;
-  this->yVelocity = -1;
+  return this->velocity;
 }
 
-void Ghost::moveDown()
+int* Ghost::getPosition()
 {
-  this->xVelocity = 0;
-  this->yVelocity = 1;
+  return this->position;
 }
 
-void Ghost::moveLeft()
-{
-  this->xVelocity = -1;
-  this->yVelocity = 0;
-}
 
-void Ghost::moveRight()
-{
-  this->xVelocity = 1;
-  this->yVelocity = 0;
-}
 

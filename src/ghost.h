@@ -1,21 +1,18 @@
-#ifndef GHOST
-#define GHOST
+#ifndef GHOST_H
+#define GHOST_H
 
 
 class Ghost{
   public:
-    void initGhost();
-    void moveUp();
-    void moveDown();
-    void moveLeft();
-    void moveRight();
-    int getXVelocity();
-    int getYVelocity();
-    Ghost(int initX, int initY, int xVelocity, int yVelocity);
-  private:
-    int initX, initY;
-    int currentX, currentY;
-    int xVelocity, yVelocity;
+    void setVelocity(int row, int col);
+    void setPosition(int row, int col);
+    int* getVelocity();
+    int* getPosition();
     
+  
+  private:
+    int* position;
+    int* velocity;
+  
 };
 #endif

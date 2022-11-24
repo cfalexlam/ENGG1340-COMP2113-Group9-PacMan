@@ -1,12 +1,12 @@
 #include <pacman.h>
 
-void Pacman::setPosition(int row , int col)
+void Pacman::setPosition(int row, int col)
 {
-  this->postion[0] = row;
-  this->postion[1] = col;
+  this->position[0] = row;
+  this->position[1] = col;
 }
 
-void Pacman::setVelocity(int row , int col){
+void Pacman::setVelocity(int row, int col){
   this->velocity[0] = row;
   this->velocity[1] = col;
 }
