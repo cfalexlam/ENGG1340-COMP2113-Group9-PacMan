@@ -1,15 +1,16 @@
 #include "screenrenderer.h"
 #include <iostream>
 #include <fstream>
+#include <iomanip>
 #include <ncurses.h>
 
 using namespace std;
 
 // Receive and convert keyboard input into move and decide further actions
 void ScreenRenderer::KeyboardModeOpen() { // in keyboardmode, use printw(mystring.c_str()) instead of cout<< mystring
-    initscr(); //initialize screen
+    initscr(); // initialize screen
     noecho(); // no input display
-    keypad(stdscr,true) // allow arrow key
+    keypad(stdscr,true); // allow arrow key
 }
 
 void ScreenRenderer::KeyboardModeWB() {
@@ -38,6 +39,11 @@ string ScreenRenderer::takeCmdInput(string message) {
 
 void ScreenRenderer::printFile(const string& fileName) {
   ifstream fin(fileName);
+
+  if (fin.fail()) {
+    return;
+  }
+
   string line;
   while (getline(fin, line))
     cout << line << endl;
@@ -69,4 +75,11 @@ void ScreenRenderer::printStartMenu() {
         cout << "Invalid command. Please try again." << endl;
     }
   }
+}
+
+void ScreenRenderer::printLoseScreen(Player pl) {
+  cout << setw(20) << "YOU LOSE" << endl;
+  cout << "You die at level " << pl.getLevel() << endl;
+  cout << "Your total score is " << pl.getScore() << endl;
+  cout << "(Press any key to continue)"<< endl;
 }

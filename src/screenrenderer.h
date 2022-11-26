@@ -2,10 +2,10 @@
 #define SCREENRENDERER_H
 
 #include <string>
+#include "player.h"
 
 using namespace std;
 
-class Board;
 class Player;
 
 class ScreenRenderer{
@@ -15,8 +15,8 @@ class ScreenRenderer{
         void printStartMenu();
         void printPauseMenu();
         void printRespawnCountdown();
-        void printMaze(Board b);
-        void printPlayerStatus(Player p);
+        void printPlayerStatus(Player pl);
+        void printLoseScreen(Player pl);
 
         string takeCmdInput(string message);
         void KeyboardModeOpen();

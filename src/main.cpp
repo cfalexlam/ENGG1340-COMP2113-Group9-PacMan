@@ -30,7 +30,7 @@ void MainGame::mainLoop() {
     Player pl(s.takeCmdInput("Please enter your name: "));
 
     Maze m(s.takeCmdInput("Please enter the filename of the maze: "));
-    s.takeCmdInput("Hi " + p.getName() + "! Are you ready? (Press any key to continue)");
+    s.takeCmdInput("Hi " + pl.getName() + "! Are you ready? (Press any key to continue)");
 
     // Change keyboard mode
     s.KeyboardModeOpen();
@@ -70,8 +70,8 @@ void MainGame::mainLoop() {
                 pl.loseLife();
                 if (pl.getLives == 0) {
                     // Ends the game when player loses all his lives
-                    s.printLoseScreen(pl.getScore());
-                    s.KeyboardModeWb();
+                    s.printLoseScreen(pl);
+                    s.KeyboardModeWB();
                     getch();
                     s.KeyboardModeClose();
                     exit();
