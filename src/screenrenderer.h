@@ -5,6 +5,8 @@
 
 using namespace std;
 
+class Player;
+
 class ScreenRenderer{
     public:
         void printLinesToScreen(string s);
