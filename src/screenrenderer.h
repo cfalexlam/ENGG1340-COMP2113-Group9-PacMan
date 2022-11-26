@@ -3,25 +3,27 @@
 
 #include <string>
 
+using namespace std;
+
 class Board;
 class Player;
 
 class ScreenRenderer{
     public:
         void printLinesToScreen(string s);
-        void printFile(const std::string& filename);
+        void printFile(const string& fileName);
         void printStartMenu();
         void printPauseMenu();
         void printRespawnCountdown();
         void printMaze(Board b);
         void printPlayerStatus(Player p);
 
-        void takeCmdInput(string s);
+        string takeCmdInput(string message);
         void KeyboardModeOpen();
-        void KeyboardModeWb();
-        void KeyboardModeNb();
+        void KeyboardModeWB();
+        void KeyboardModeNB();
         void KeyboardModeClose();
-        void KeyboardModePrint();
+        void KeyboardModePrint(string message);
 };
 
 #endif
