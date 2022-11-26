@@ -2,11 +2,8 @@
 #define SCREENRENDERER_H
 
 #include <string>
-#include "player.h"
 
 using namespace std;
-
-class Player;
 
 class ScreenRenderer{
     public:

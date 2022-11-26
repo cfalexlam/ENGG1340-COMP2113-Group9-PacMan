@@ -1,4 +1,5 @@
 #include "screenrenderer.h"
+#include "player.h"
 #include <iostream>
 #include <fstream>
 #include <iomanip>
