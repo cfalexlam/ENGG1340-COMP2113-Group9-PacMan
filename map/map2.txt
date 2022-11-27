@@ -1,14 +1,14 @@
-10 10   //spawn point of pacman
+8 17   //spawn point of pacman
 4       //number of ghost
 1 1     //spawn point of ghost1
-1 19    //spawn point of ghost2
-19 1    //spawn point of ghost3
-19 19   //spawn point of ghost4
+1 34    //spawn point of ghost2
+15 1    //spawn point of ghost3
+15 34   //spawn point of ghost4
 4       //number of powerpellets
-3 5     //coordinate of powerpellets1
-3 15    //coordinate of powerpellets2
-15 5    //coordinate of powerpellets3
-15 15   //coordinate of powerpellets4
+3 10     //coordinate of powerpellets1
+3 22    //coordinate of powerpellets2
+15 7    //coordinate of powerpellets3
+15 27   //coordinate of powerpellets4
 ====================================
 =..................................=
 =..................................=
