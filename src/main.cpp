@@ -22,29 +22,8 @@ int main(){
 
 void printStartMenu() {
   system("clear");
-
   printFile("welcome.txt");
-
   printFile("command.txt");
-
-  char input;
-  while (cin >> input) {
-    switch (input) {
-      case 'p':
-        return;
-
-      case 'q':
-        exit(0);
-
-      case 'r':
-        printFile("gamerule.txt");
-        cout << "Please enter the next command (p/r/q)" << endl;
-        break;
-
-      default:
-        cout << "Invalid command. Please try again." << endl;
-    }
-  }
 }
 
 string takeCmdInput(string message) {
@@ -55,7 +34,6 @@ string takeCmdInput(string message) {
 }
 void printFile(const string& fileName) {
   ifstream fin(fileName);
-
   if (fin.fail()) {
     return;
   }
