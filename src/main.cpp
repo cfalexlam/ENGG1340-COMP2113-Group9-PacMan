@@ -11,7 +11,7 @@ int main(){
       string playername;
       playername = takeCmdInput("Input your name");
       Maingame game(playername);
-      game.mainloop();
+      while (game.mainloop);
     }
     if (command=="r") //show rule
       
