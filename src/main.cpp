@@ -1,4 +1,5 @@
 #include <iostream>
+#include "maingame.h"
 using namespace std;
 
 int main(){
