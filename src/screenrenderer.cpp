@@ -31,8 +31,6 @@ void ScreenRenderer::KeyboardModePrint(string str) {
     printw(str.c_str());
 }
 
-
-
 void ScreenRenderer::printLoseScreen(Player pl) {
   cout << setw(20) << "YOU LOSE" << endl;
   cout << "You die at level " << pl.getLevel() << endl;
