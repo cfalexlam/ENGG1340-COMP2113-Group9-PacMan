@@ -6,6 +6,7 @@
 #include <tuple>
 #include <ghost.h>
 #include <pacman.h>
+#include <pellet.h>
 
 class Pacman;
 class Ghost;
@@ -18,6 +19,7 @@ class Maze{
         Ghost blinky;
         Ghost pinky;
         Ghost clyde;
+
 
         Pacman p;
         bool isWall(int row,int col);

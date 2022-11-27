@@ -1,7 +1,7 @@
 #include "maze.h"
-
+#include <string>
 #include <fstream>
-
+#include <vector>
 #include <sstream>
 
 char WALL = '=';
@@ -9,7 +9,7 @@ char FOOD = '.';
 char PLAYER = 'X';
 char SPACE = ' ';
 char GHOST = 'Q';
-char PELLETS = 'O'
+char PELLETS = 'O';
 
 Maze::Maze(string filename) {
   ifstream fin;
@@ -34,6 +34,7 @@ Maze::Maze(string filename) {
     linein >> row >> col;
    
     Ghost ghost;   //set position of  ghost
+    vector <Ghost> ghosts;
     ghost.setPosition(stoi(row),stoi(col));
     ghosts.push_back(ghost);
     linein.clear();
@@ -46,6 +47,7 @@ Maze::Maze(string filename) {
     linein >> row >> col;
     
     Pellet pellet;   //set position of power pellets
+    vector <Pellet> pellets;
     pellet.setPosition(stoi(row),stoi(col));
     pellets.push_back(pellet);
     linein.clear();
