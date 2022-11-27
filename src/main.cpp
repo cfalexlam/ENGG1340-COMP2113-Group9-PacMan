@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "maingame.h"
 using namespace std;
 
@@ -11,8 +12,8 @@ int main(){
     {
       string playername;
       playername = takeCmdInput("Input your name");
-      Maingame game(playername);
-      while (game.mainloop);
+      MainGame game(playername);
+      while (game.mainLoop);
     }
     if (command=="r") //show rule
       
@@ -23,18 +24,20 @@ int main(){
 
 void printStartMenu() {
   system("clear");
-  printFile("welcome.txt");
-  printFile("command.txt");
+  printFile("../templates/welcome.txt");
+  printFile("../templates/command.txt");
 }
 
-string takeCmdInput(string message) {
-    cout << message << endl;
+string takeCmdInput(string prompt) {
+    cout << prompt << endl;
     string input;
     cin >> input;
     return input;
 }
+
 void printFile(const string& fileName) {
   ifstream fin(fileName);
+
   if (fin.fail()) {
     return;
   }
