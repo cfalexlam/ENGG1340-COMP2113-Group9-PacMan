@@ -32,8 +32,12 @@ void ScreenRenderer::KeyboardModePrint(string str) {
 }
 
 void ScreenRenderer::printLoseScreen(Player pl) {
-  cout << setw(20) << "YOU LOSE" << endl;
-  cout << "You die at level " << pl.getLevel() << endl;
-  cout << "Your total score is " << pl.getScore() << endl;
-  cout << "(Press any key to continue)"<< endl;
+  printw("YOU LOSE!\n");
+  printw("You die at level %d \n", pl.getLevel());
+  printw("Your total score is %d \n", pl.getScore());
+}
+
+void ScreenRenderer::printWinScreen(Player pl) {
+  printw("CONGRATULATION! YOU WIN!\n");
+  printw("Your total score is %d \n", pl.getScore());
 }
