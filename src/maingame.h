@@ -5,6 +5,8 @@
 class MainGame{
     public:
         // Run the main game loop
+        string playername;
+        MainGame(string playername);
         void mainLoop();
 };
 
