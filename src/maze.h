@@ -7,28 +7,30 @@
 #include <ghost.h>
 #include <pacman.h>
 #include <pellet.h>
+#include <ncurses.h>
 
 class Pacman;
 class Ghost;
 
+
 class Maze{
     public:
-        Maze();
         
         Ghost inky;
         Ghost blinky;
         Ghost pinky;
         Ghost clyde;
+        std::vector <std::vector <char>> themaze;
 
-
-        Pacman p;
-        bool isWall(int row,int col);
-        bool isGhost(int row,int col);
-        bool isFood(int row,int col);
-        void Maze::movePacman(int row,int col, int nrow,int ncol);
+        Pacman pacman;
+        bool isWall(std::vector <std::vector <char>> maze, int row,int col);
+        bool isGhost(std::vector <std::vector <char>> maze, int row,int col);
+        bool isFood(std::vector <std::vector <char>> maze, int row,int col);
+        void movePacman(std::vector <std::vector <char>> maze, int row,int col, int nrow,int ncol);
+        void printMaze();
         int foodLeft();
         // load maze from templates
-        Maze(string filename);
+        void maze(std::string filename);
 
         // restart the game while keeping the dots; respawn the ghosts and pacman at their spawnpoints
         void respawn(bool newLevel);
