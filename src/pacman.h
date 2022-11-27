@@ -8,7 +8,7 @@ class Pacman{
     void setPosition(int row, int col);
     int* getVelocity();
     int* getPosition();
-    
+    int strong;
   
   private:
     int* position;
