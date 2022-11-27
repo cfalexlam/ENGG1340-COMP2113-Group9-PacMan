@@ -31,52 +31,7 @@ void ScreenRenderer::KeyboardModePrint(string str) {
     printw(str.c_str());
 }
 
-string ScreenRenderer::takeCmdInput(string message) {
-    cout << message << endl;
-    string input;
-    cin >> input;
-    return input;
-}
 
-void ScreenRenderer::printFile(const string& fileName) {
-  ifstream fin(fileName);
-
-  if (fin.fail()) {
-    return;
-  }
-
-  string line;
-  while (getline(fin, line))
-    cout << line << endl;
-  fin.close();
-}
-
-void ScreenRenderer::printStartMenu() {
-  system("clear");
-
-  printFile("welcome.txt");
-
-  printFile("command.txt");
-
-  char input;
-  while (cin >> input) {
-    switch (input) {
-      case 'p':
-        return;
-
-      case 'q':
-        exit(0);
-
-      case 'r':
-        printFile("gamerule.txt");
-        cout << "Please enter the next command (p/r/q)" << endl;
-        break;
-
-      default:
-        cout << "Invalid command. Please try again." << endl;
-    }
-  }
-}
 
 void ScreenRenderer::printLoseScreen(Player pl) {
   cout << setw(20) << "YOU LOSE" << endl;
