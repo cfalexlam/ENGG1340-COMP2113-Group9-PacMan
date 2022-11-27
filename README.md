@@ -19,7 +19,7 @@ Pac-Man, originally called Puck Man in Japan, is a legendary and classic maze ac
 
 ## Features implemented
 1.  Generation of random game sets or events
-    * Power pellets are randomly generated on the maze using random seeds
+    * The next move of ghost is randomly generated using random seeds
 
 2.  Data structures for storing game status
     * Custom classes are implemented to partition the program into smaller bits and bundling functional parts together for modularization and effective problem solving.
@@ -33,7 +33,7 @@ Pac-Man, originally called Puck Man in Japan, is a legendary and classic maze ac
 
 4.  File I/O (e.g. for loading or saving game status)
     * For file input, text files which contain the structure of the maze is loaded during initialization of the game. A player can also choose to load exisiting saves.
-    * For file output, when the player quits the game, his current game status will be output to a text file. 
+    * For file output, when the player quits the game, his current game status will be output to a text file.
 
 5.  Program codes in multiple files
     * The program's code is partitioned into multiple .cpp and header files, according to classes.
