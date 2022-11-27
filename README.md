@@ -19,7 +19,7 @@ Pac-Man, originally called Puck Man in Japan, is a legendary and classic maze ac
 
 ## Features implemented
 1.  Generation of random game sets or events
-    * The next move of ghost is randomly generated using random seeds
+    * The next move of ghost is randomly generated using random seeds.
 
 2.  Data structures for storing game status
     * Custom classes are implemented to partition the program into smaller bits and bundling functional parts together for modularization and effective problem solving.
