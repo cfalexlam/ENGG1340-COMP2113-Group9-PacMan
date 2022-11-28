@@ -4,9 +4,9 @@
 #include <vector>
 #include <string>
 #include <tuple>
-#include <ghost.h>
-#include <pacman.h>
-#include <pellet.h>
+#include "ghost.h"
+#include "pacman.h"
+#include "pellet.h"
 #include <ncurses.h>
 
 class Pacman;

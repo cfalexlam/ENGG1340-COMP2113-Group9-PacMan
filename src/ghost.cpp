@@ -1,5 +1,5 @@
-#include <ghost.h>
-#include <maze.h>
+#include "ghost.h"
+#include "maze.h"
 #include <random>
 #include <vector>
 

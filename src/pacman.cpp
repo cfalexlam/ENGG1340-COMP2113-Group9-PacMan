@@ -1,4 +1,4 @@
-#include <pacman.h>
+#include "pacman.h"
 
 void Pacman::setPosition(int row, int col)
 {

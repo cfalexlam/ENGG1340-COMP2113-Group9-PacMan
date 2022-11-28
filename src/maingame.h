@@ -7,7 +7,7 @@ class MainGame{
         // Run the main game loop
         string playername;
         MainGame(string playername);
-        void mainLoop();
+        bool mainLoop();
 };
 
 #endif
