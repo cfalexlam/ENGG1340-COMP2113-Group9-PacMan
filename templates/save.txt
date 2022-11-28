@@ -1,0 +1,5 @@
+Slot Player level score lives
+1 
+2 
+3 
+// end of save
