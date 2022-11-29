@@ -11,37 +11,50 @@
 
 class Pacman;
 class Ghost;
+class Pellet;
 
 
 class Maze{
     public:
-        
-        Ghost inky;
-        Ghost blinky;
-        Ghost pinky;
-        Ghost clyde;
-        std::vector <std::vector <char>> themaze;
+        // Storing the maze structure in a 2D vector
+        std::vector<std::vector <char>> maze;
 
+        // Storing the positions of pacman, ghosts and pellets
         Pacman pacman;
-        bool isWall(std::vector <std::vector <char>> maze, int row,int col);
-        bool isGhost(std::vector <std::vector <char>> maze, int row,int col);
-        bool isFood(std::vector <std::vector <char>> maze, int row,int col);
-        void movePacman(std::vector <std::vector <char>> maze, int row,int col, int nrow,int ncol);
-        void printMaze();
-        int foodLeft();
-        // load maze from templates
-        void maze(std::string filename);
+        std::vector<Ghost> ghosts;
+        std::vector<Pellet> pellets;
 
-        // restart the game while keeping the dots; respawn the ghosts and pacman at their spawnpoints
+        // Class constructor to load maze from templates
+        // https://softwareengineering.stackexchange.com/questions/388977/how-to-reach-the-parent-object
+        Maze(std::string filename): Ghost(*this);
+
+        // Check identity of each grid
+        bool isWall(int row, int col);
+        bool isGhost(int row, int col);
+        bool isFood(int row, int col);
+
+        // Print the maze (can consider moving this function to the screenrenderer class)
+        void printMaze();
+
+        // Update position of pacman
+        void movePacman(int row,int col, int nrow,int ncol);
+        void moveGhost();
+
+        // Return the number of remaining food
+        int foodLeft();
+        
+        // Restart the game while keeping the dots; respawn the ghosts and pacman at their spawnpoints
         void respawn(bool newLevel);
 
-        // update position of entities
+        // Update position of entities (TBC)
         void updatePos();
 
-        // update states of entities
+        // Update states of entities (TBC)
         void updateStates();
+
     private:
-        int food=0;
+        // Store number of food
+        int food = 0;
 };
 
 #endif

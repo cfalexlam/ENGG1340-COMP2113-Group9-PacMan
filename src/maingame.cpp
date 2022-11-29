@@ -1,11 +1,19 @@
 #include <cstdlib>
+
 #include <ncurses.h> // need to add "-lncurses" at last when compile
+
 #include <iostream>
 
+#include <string>
+
 #include <unistd.h>
+
 #include "player.h"
+
 #include "maze.h"
+
 #include "screenrenderer.h"
+
 #include "ghost.h"
 
 bool MainGame::mainLoop() {
@@ -17,126 +25,149 @@ bool MainGame::mainLoop() {
     srand(time(NULL));
 
     // Initialize screen renderer
-    ScreenRenderer screen;
-    Player player(playername);
-    Maze maze(s.takeCmdInput("Please enter the filename of the maze: "));
+    ScreenRenderer s;
+    Player pl(playername);
+    std::string fn;
+    fn = s.takeCmdInput("Please enter the filename of the maze: ");
+    Maze m(fn);
 
     screen.KeyboardModeOpen();
     screen.KeyboardModeWB();
     screen.KeyboardModePrint("Hi " + pl.getName() + "! Are you ready? (Press any key to continue)");
     getch();
     screen.KeyboardModeNB();
-    
-    int fakeVelocity[2]={0,0};
+
+    int presumedVelocity[2] = {
+        0,
+        0
+    };
+
     // Main game logic
     while (1) {
-        maze.printmaze();
+        m.printMaze();
 
+        // Get user input from keyboard
         int input;
         input = getch();
-        if (input == int('q')){
-            screen.KeyboardModeClose();
-            return false;   //stop game
+        if (input == int('q')) {
+            s.KeyboardModeClose();
+            return false; // stop the game
         }
 
+        // Set presumed velocities of pacman, which correspond to user input
         switch (input) {
             case KEY_UP:
-                fakeVelocity[0]=-1;
-                fakeVelocity[1]=0;
+                presumedVelocity[0] = -1;
+                presumedVelocity[1] = 0;
                 break;
             case KEY_DOWN:
-                fakeVelocity[0]=1;
-                fakeVelocity[1]=0;
+                presumedVelocity[0] = 1;
+                presumedVelocity[1] = 0;
                 break;
             case KEY_LEFT:
-                fakeVelocity[0]=0;
-                fakeVelocity[1]=-1;
+                presumedVelocity[0] = 0;
+                presumedVelocity[1] = -1;
                 break;
             case KEY_RIGHT:
-                fakeVelocity[0]=0;
-                fakeVelocity[1]=1;
+                presumedVelocity[0] = 0;
+                presumedVelocity[1] = 1;
                 break;
         }
-        
-        if (! maze.isWall(p.getPosition()[0] + fakeVelocity[0] , p.getPosition()[1] + fakeVelocity[1]) )   /// Check if pacman is going to hit a wall
-            maze.p.setVelocity(fakeVelocity[0] , fakeVelocity[1]);
-        
-        for (int i = 0 ; i < maze.ghosts.size() ; i++)
-        {
-            if ( collision( maze.ghosts[i] , maze.p ) and p.strong == 0 )
-            {
-                player.loseLife();
-                if ( player.getLives == 0 ) {
-                    // Ends the game when player loses all his lives
-                    screen.printLoseScreen(pl);
-                    screen.KeyboardModeWB();
-                    int input;
-                    screen.KeyboardModePrint("Retry?(y/n)")
-                    input = getch();
-                    switch (input){
-                        case 'y':
-                            screen.KeyboardModeClose();
-                            return true;
-                            break;
-                        case 'n':
-                            screen.KeyboardModeClose();
-                            return false;
-                            break;   
-                    }  
+
+        // Only update the actual velocities of pacman if the instruction is valid, i.e. the pacman is not bumping into a wall
+        if (!m.isWall(pacman.getPosition()[0] + presumedVelocity[0], pacman.getPosition()[1] + presumedVelocity[1])) 
+            m.pacman.setVelocity(presumedVelocity[0], presumedVelocity[1]);
+
+        // Update velocities of ghosts if it moves towards a wall, or has a velocity of {0, 0}
+        for (int i=0; i<m.ghosts.size(); i++){
+            if ((m.ghosts[i][0] == 0 && m.ghosts[i][1] == 0) ||
+                (m.isWall(m.ghosts[i].getPosition()[0]+m.ghosts[i].getVelocity()[0],
+                          m.ghosts[i].getPosition()[1]+m.ghosts[i].getVelocity()[1]))) {
+                    ghosts[i].setRandomVelocity();
                 }
-                maze.respawn(newLevel = false); // restore the starting positions of ghosts and pacman, while keeping the dots at their current places
-                screen.printRespawnCountdown(); // countdown for 3 seconds before restarting the game
+        }
+        
+        // Check if pacman is bumping into any of the ghosts
+        for (int i = 0; i < m.ghosts.size(); i++) {
+            if (collision(m.ghosts[i], m.pacman) and m.pacman.strong == 0) {
+                pl.loseLife();
+                if (pl.getLives == 0) {
+                    // Ends the game when player loses all his lives
+                    s.printLoseScreen(pl);
+                    s.KeyboardModeWB();
+                    int input;
+                    s.KeyboardModePrint("Retry?(y/n)")
+                    input = getch();
+                    switch (input) {
+                    case 'y':
+                        s.KeyboardModeClose();
+                        return true;
+                        break;
+                    case 'n':
+                        s.KeyboardModeClose();
+                        return false;
+                        break;
+                    }
+                }
+                m.respawnSameLevel(); // restore the starting positions of ghosts and pacman, while keeping the dots at their current places
+                s.printRespawnCountdown(); // countdown for 3 seconds before restarting the game
                 break;
             }
-            if ( collision( maze.ghosts[i] , maze.p ) and p.strong > 0 )
-            {
-                maze.ghosts[i].respawn();
+            if (collision(m.ghosts[i], m.pacman) && m.pacman.strong > 0) {
+                m.respawnGhost(m.ghosts[i]);
                 continue;
             }
-            maze.moveghost();
-            maze.ghost.setPosition(maze.ghost.getPosition()[0] + maze.ghost.getVelocity()[0], maze.ghost.getPosition()[1] + maze.ghost.getVelocity()[1]);
         }
-        
-        if (maze.isFood(p.getPosition()[0] + p.getVelocity()[0], p.getPosition()[1] + p.getVelocity()[1])) //if a food is eaten
-            player.updateScore();
-        
-         if (maze.isPellet(p.getPosition()[0] + p.getVelocity()[0], p.getPosition()[1] + p.getVelocity()[1])) //if a pellet is eaten
-             p.strong = 20;
-        if (player.getScore == maze.food) //win
-        {
-            screen.printWinScreen(pl);
-                    screen.KeyboardModeWB();
-                    int input;
-                    screen.KeyboardModePrint("Continue?(y/n)")
-                    input = getch();
-                    switch (input){
-                        case 'y':
-                            screen.KeyboardModeClose();
-                            return true;
-                            break;
-                        case 'n':
-                            screen.KeyboardModeClose();
-                            return false;
-                            break;   
-                    }  
-        }
-            
-        maze.movepacman();
-        p.setPosition(p.getPosition()[0] + p.getVelocity()[0], p.getPosition()[1] + p.getVelocity()[1]);
-        
 
-        usleep(0.2 * 1000000); // 0.2s delay
-        p.strong = max(0,p.strong-1);
+        // Update score when a food is eaten
+        if (m.isFood(m.pacman.getPosition()[0] + m.pacman.getVelocity()[0], m.pacman.getPosition()[1] + m.pacman.getVelocity()[1])) 
+            pl.updateScore();
+
+        // Update score and pacman state when a power pellet is eaten
+        if (m.isPellet(m.pacman.getPosition()[0] + m.pacman.getVelocity()[0], m.pacman.getPosition()[1] + m.pacman.getVelocity()[1]))
+            m.pacman.strong = 20;
+
+        // Update the position representation of Pacman and Ghost in the maze
+        m.movePacman();
+        m.moveGhost();
+
+        // A player wins a level when its score == # of food (?)
+        if (pl.getScore == m.food)
+        {
+            s.printWinScreen(pl);
+            s.KeyboardModeWB();
+            int input;
+            s.KeyboardModePrint("Continue?(y/n)")
+            input = getch();
+            switch (input) {
+            case 'y':
+                s.KeyboardModeClose();
+                maze = Maze(fn);
+                return true;
+                break;
+            case 'n':
+                s.KeyboardModeClose();
+                return false;
+                break;
+            }
+        }
+
+        // Update position stored in the pacman object
+        m.pacman.setPosition(m.pacman.getPosition()[0] + m.pacman.getVelocity()[0], m.pacman.getPosition()[1] + m.pacman.getVelocity()[1]);
+
+        // 0.2 second of delay for each looo
+        usleep(0.2 * 1000000);
+
+        // Pacman remains in "strong" state for 4 seconds (20 loops)
+        m.pacman.strong = max(0, m.pacman.strong - 1);
     }
     s.keyboardModeClose();
 }
-Maingame::Maingame(string playername)
-{
-    this->playername = playername;
-    
+Maingame::Maingame(string playername) {
+    this -> playername = playername;
+
 }
-bool collision(Ghost ghost,Pacman p)
-{
-    return (ghost.getPosition()[0] + ghost.getVelocity()[0] == p.getPosition()[0] + p.getVelocity()[0] and  ghost.getPosition()[1] + ghost.getVelocity()[1] == p.getPosition()[1] + p.getVelocity()[1])
-        or (ghost.getPosition()[0] + ghost.getVelocity()[0] == p.getPosition()[0] and  ghost.getPosition()[1] + ghost.getVelocity()[1] == p.getPosition()[1])
-}
+bool collision(Ghost& ghost, Pacman& pacman) {
+    return (ghost.getPosition()[0] + ghost.getVelocity()[0] == pacman.getPosition()[0] + pacman.getVelocity()[0] && ghost.getPosition()[1] + ghost.getVelocity()[1] == pacman.getPosition()[1] + pacman.getVelocity()[1]);
+    //|| (ghost.getPosition()[0] + ghost.getVelocity()[0] == pacman.getPosition()[0] && ghost.getPosition()[1] + ghost.getVelocity()[1] == pacman.getPosition()[1])
+}   // second expression is redundant, with extra case included (e.g. a ghost and a pacman moving in the same direction, while being adjacent to each other)

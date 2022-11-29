@@ -8,6 +8,8 @@ class Pacman{
     void setPosition(int row, int col);
     int* getVelocity();
     int* getPosition();
+
+    // Invulnerable state counter
     int strong;
   
   private:
