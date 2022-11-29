@@ -44,7 +44,9 @@ class Maze{
         int foodLeft();
         
         // Restart the game while keeping the dots; respawn the ghosts and pacman at their spawnpoints
-        void respawn(bool newLevel);
+        void respawnSameLevel();
+
+        void respawnGhost();
 
         // Update position of entities (TBC)
         void updatePos();

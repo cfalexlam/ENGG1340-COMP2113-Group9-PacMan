@@ -123,14 +123,14 @@ void Maze::respawnSameLevel(){
     }
 }
 
-bool Maze::isWall(std::vector < std::vector < char >> maze, int row, int col) {
+bool Maze::isWall(int row, int col) {
     return maze[row][col] == WALL;
 }
 
-bool Maze::isGhost(std::vector < std::vector < char >> maze, int row, int col) {
+bool Maze::isGhost(int row, int col) {
     return maze[row][col] == GHOST;
 }
 
-bool Maze::isFood(std::vector < std::vector < char >> maze, int row, int col) {
+bool Maze::isFood(int row, int col) {
     return maze[row][col] == FOOD;
 }

@@ -20,7 +20,7 @@ class Ghost{
     int* currentPosition;
     int* currentVelocity;
     char liftedObject;
-    Maze &m;
+    Maze m;
   
 };
 #endif
