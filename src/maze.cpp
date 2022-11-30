@@ -114,8 +114,8 @@ void Maze::moveGhost(){
         int newPosX = ghosts[i].getCurrentPosition()[0] + ghosts[i].getCurrentVelocity()[0];
         int newPosY = ghosts[i].getCurrentPosition()[1] + ghosts[i].getCurrentVelocity()[1];
 
-        maze[ghosts[i].getCurrentPosition()[0]][ghosts[i].getCurrentPosition()[0]] = ghosts[i].liftedObject;
-        ghosts[i].liftedObject = maze[newPosX][newPosY];
+        maze[ghosts[i].getCurrentPosition()[0]][ghosts[i].getCurrentPosition()[1]] = ghosts[i].liftedObject;
+        ghosts[i].liftedObject  = maze[newPosX][newPosY];
         maze[newPosX][newPosY] = GHOST;
 
         ghosts[i].setCurrentPosition(newPosX,newPosY);
