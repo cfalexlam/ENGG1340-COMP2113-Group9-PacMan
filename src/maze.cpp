@@ -5,7 +5,7 @@
 #include <string>
 
 #include <sstream>
-
+using namespace std;
 char WALL = '=';
 char FOOD = '.';
 char PLAYER = 'X';
@@ -13,12 +13,11 @@ char SPACE = ' ';
 char GHOST = 'Q';
 char PELLETS = 'O';
 
-bool Maze::loadFile(std::string filename) {
+Maze::Maze(std::string filename) {
     std::ifstream fin;
     fin.open(filename); //later change to ".//map//filename.txt"
 
     if (fin.fail()) { // file not exist;
-        return false;
     }
     std::string line, row, col;
     std::istringstream linein;
@@ -26,7 +25,9 @@ bool Maze::loadFile(std::string filename) {
     getline(fin, line); // Read in pacman position
     linein.str(line);
     linein >> row >> col;
-    pacman.setPosition(stoi(row), stoi(col));
+    pacman.initPosition[0] = stoi(row);
+    pacman.initPosition[1] = stoi(col);
+    pacman.setCurrentPosition(stoi(row), stoi(col));
     linein.clear();
 
     getline(fin, line); // Read in ghost positions
@@ -36,19 +37,17 @@ bool Maze::loadFile(std::string filename) {
         linein.str(line);
         linein >> row >> col;
 
-        Ghost ghost(stoi(row), stoi(col));
+        Ghost ghost(this,stoi(row), stoi(col));
         ghosts.push_back(ghost);
         linein.clear();
     }
 
     getline(fin, line); // Read in power pellet positions
-    Pellet pellet;
     for (int i = 0, j = stoi(line); i < j; i++) {
         getline(fin, line);
         linein.str(line);
         linein >> row >> col;
-
-        pellet.setPosition(stoi(row), stoi(col)); // Store positions in power pellets
+	Pellet pellet(stoi(row), stoi(col));// Store positions in power pellets
         pellets.push_back(pellet);
         linein.clear();
     }
@@ -71,12 +70,11 @@ bool Maze::loadFile(std::string filename) {
         food -= 1;
     }
     for (int i = 0; i < ghosts.size(); i++) {
-        maze[ghosts[i].getPosition()[0]][ghosts[i].getPosition()[1]] = GHOST;
+        maze[ghosts[i].getCurrentPosition()[0]][ghosts[i].getCurrentPosition()[1]] = GHOST;
         food -= 1;
     }
-    maze[pacman.getPosition()[0]][pacman.getPosition()[1]] = PLAYER;
+    maze[pacman.getCurrentPosition()[0]][pacman.getCurrentPosition()[1]] = PLAYER;
     food -= 1;
-    return true;
 }
 
 void Maze::printMaze() {
@@ -88,52 +86,50 @@ void Maze::printMaze() {
 int Maze::foodLeft() {
     return food;
 }
-void Maze::movePacman(std::vector < std::vector < char >> maze, int row, int col, int nrow, int ncol) {
-    maze[row][col] = SPACE;
-    maze[nrow][ncol] = PLAYER;
+void Maze::movePacman(int* currentPosition, int* presumedPosition) {
+    maze[currentPosition[0]][currentPosition[1]] = SPACE;
+    maze[presumedPosition[0]][presumedPosition[1]] = PLAYER;
 }
 
 void Maze::moveGhost(){
-    for (int i=0; i<maze.ghosts.size(); i++){
-        int newPosX = ghosts[i].currentPosition()[0] + ghosts[i].currentVelocity()[0];
-        int newPosY = ghosts[i].currentPosition()[1] + ghosts[i].currentVelocity()[1];
+    for (int i=0; i<ghosts.size(); i++){
+        int newPosX = ghosts[i].getCurrentPosition()[0] + ghosts[i].getCurrentVelocity()[0];
+        int newPosY = ghosts[i].getCurrentPosition()[1] + ghosts[i].getCurrentVelocity()[1];
 
-        maze[ghosts[i].currentPosition()[0]][ghosts[i].currentPosition()[0]] = ghosts[i].liftedObject;
-        ghost[i].liftedObject = maze[newPosX][newPosY]
+        maze[ghosts[i].getCurrentPosition()[0]][ghosts[i].getCurrentPosition()[0]] = ghosts[i].liftedObject;
+        ghosts[i].liftedObject = maze[newPosX][newPosY];
         maze[newPosX][newPosY] = GHOST;
 
-        ghost[i].currentPosition[0] = newPosX;
-        ghost[i].currentPosition[1] = newPosY;
+        ghosts[i].setCurrentPosition(newPosX,newPosY);
     }
 }
 
-void Maze::respawnGhost(Ghost& g){
-    maze[g.currentPosition[0]][currentPosition[1]] = g.liftedObject;
-    g.liftedObject = maze[g.initPosition[0]][g.initPosition[1]];
-    maze[g.initPosition[0]][g.initPosition[1]] = GHOST;
+void Maze::respawnGhost(Ghost ghost){
+    maze[ghost.getCurrentPosition()[0]][ghost.getCurrentPosition()[1]] = ghost.liftedObject;
+    ghost.liftedObject = maze[ghost.initPosition[0]][ghost.initPosition[1]];
+    maze[ghost.initPosition[0]][ghost.initPosition[1]] = GHOST;
     
-    g.currentPosition = g.initPosition;
-    g.setVelocity(0, 0);
+    ghost.setCurrentPosition(ghost.initPosition[0],ghost.initPosition[1]);
+    ghost.setCurrentVelocity(0, 0);
 }
 
 void Maze::respawnSameLevel(){
-    movePacman(pacman.currentPosition[0], pacman.currentPosition[1],
-               pacman.initPosition[0], pacman.initPosition[1])
-    pacman.setPosition(pacman.initPosition[0], pacman.initPosition[1])
-    pacman.setVelocity(0, 0);
+    movePacman(pacman.getCurrentPosition(),pacman.initPosition);
+    pacman.setCurrentPosition(pacman.initPosition[0], pacman.initPosition[1]);
+    pacman.setCurrentVelocity(0, 0);
     for (int i=0; i<ghosts.size(); i++){
         respawnGhost(ghosts[i]);
     }
 }
 
-bool Maze::isWall(int& row, int& col) {
+bool Maze::isWall(int row, int col) {
     return maze[row][col] == WALL;
 }
 
-bool Maze::isGhost(int& row, int& col) {
+bool Maze::isGhost(int row, int col) {
     return maze[row][col] == GHOST;
 }
 
-bool Maze::isFood(int& row, int& col) {
+bool Maze::isFood(int row, int col) {
     return maze[row][col] == FOOD;
 }

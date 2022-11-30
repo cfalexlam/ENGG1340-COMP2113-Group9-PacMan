@@ -3,6 +3,10 @@
 #include "maingame.h"
 using namespace std;
 
+void printStartMenu();
+string takeCmdInput(string prompt);
+void printFile(const string& fileName);
+
 int main(){
   string command;
   do{
@@ -12,10 +16,12 @@ int main(){
     {
       string playername;
       playername = takeCmdInput("Input your name");
+
       MainGame game(playername);
-      while (game.mainLoop);
+      while (game.mainLoop());
     }
     if (command=="r") //show rule
+      {}
       
   }
   while (command!="q");

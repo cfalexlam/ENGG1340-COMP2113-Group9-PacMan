@@ -12,20 +12,20 @@
 class Pacman;
 class Ghost;
 class Pellet;
-
+using namespace std;
 
 class Maze{
     public:
         // Storing the maze structure in a 2D vector
-        std::vector<std::vector <char>> maze;
+        vector<vector <char>> maze;
 
         // Storing the positions of pacman, ghosts and pellets
         Pacman pacman;
-        std::vector<Ghost> ghosts;
-        std::vector<Pellet> pellets;
-
+        vector<Ghost> ghosts;
+        vector<Pellet> pellets;
+	
         // Load maze
-        bool loadFile(std::string filename);
+        Maze(string filename);
 
         // Check identity of each grid
         bool isWall(int row, int col);
@@ -36,7 +36,7 @@ class Maze{
         void printMaze();
 
         // Update position of pacman
-        void movePacman(int row, int col, int nrow, int ncol);
+        void movePacman(int* currentPosition, int* presumedPosition);
         void moveGhost();
 
         // Return the number of remaining food
@@ -45,17 +45,17 @@ class Maze{
         // Restart the game while keeping the dots; respawn the ghosts and pacman at their spawnpoints
         void respawnSameLevel();
 
-        void respawnGhost();
+        void respawnGhost(Ghost ghost);
 
         // Update position of entities (TBC)
         void updatePos();
 
         // Update states of entities (TBC)
         void updateStates();
-
+	int food=0;
     private:
         // Store number of food
-        int food = 0;
+        
 };
 
 #endif

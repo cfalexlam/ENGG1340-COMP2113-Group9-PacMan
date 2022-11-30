@@ -5,29 +5,29 @@
 #include <iomanip>
 #include <ncurses.h>
 
-using namespace std;
+
 
 // Receive and convert keyboard input into move and decide further actions
-void ScreenRenderer::KeyboardModeOpen() { // in keyboardmode, use printw(mystring.c_str()) instead of cout<< mystring
+void ScreenRenderer::keyboardModeOpen() { // in keyboardmode, use printw(mystring.c_str()) instead of cout<< mystring
     initscr(); // initialize screen
     noecho(); // no input display
     keypad(stdscr,true); // allow arrow key
 }
 
-void ScreenRenderer::KeyboardModeWB() {
+void ScreenRenderer::keyboardModeWB() {
     nodelay(stdscr,false); /* Takes keyboard input with blocking or delay */
 }
 
-void ScreenRenderer::KeyboardModeNB() {
+void ScreenRenderer::keyboardModeNB() {
     nodelay(stdscr,true); /* Takes keyboard input without blocking or delay */
 }
 
-void ScreenRenderer::KeyboardModeClose() {
+void ScreenRenderer::keyboardModeClose() {
     echo();
     endwin();
 }
 
-void ScreenRenderer::KeyboardModePrint(string str) {
+void ScreenRenderer::keyboardModePrint(std::string str) {
     printw(str.c_str());
 }
 
@@ -42,11 +42,3 @@ void ScreenRenderer::printWinScreen(Player pl) {
   printw("Your total score is %d \n", pl.getScore());
 }
 
-string takeCmdInput(string promptMessage){
-    cout << promptMessage;
-    
-    string x;    
-    cin >> x;
-    
-    return x;
-}

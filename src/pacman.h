@@ -4,17 +4,24 @@
 
 class Pacman{
   public:
-    void setVelocity(int row, int col);
-    void setPosition(int row, int col);
-    int* getVelocity();
-    int* getPosition();
+    void setCurrentVelocity(int row, int col);
+    void setCurrentPosition(int row, int col);
+    void setPresumedVelocity(int row,int col);
+    int* getCurrentVelocity();
+    int* getCurrentPosition();
+    int* getPresumedVelocity();
+    int* getPresumedPosition();
 
     // Invulnerable state counter
     int strong;
-  
+    int* initPosition;
   private:
-    int* position;
-    int* velocity;
+    int* currentPosition;
+    int* currentVelocity;
+    int* presumedPosition;
+    int* presumedVelocity;
+    
+    
   
 };
 #endif

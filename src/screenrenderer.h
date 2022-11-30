@@ -3,23 +3,22 @@
 
 #include <string>
 
-using namespace std;
 
 class Player;
 
 class ScreenRenderer{
     public:
-        void KeyboardModeOpen();
-        void KeyboardModeWB();
-        void KeyboardModeNB();
-        void KeyboardModeClose();
-        void KeyboardModePrint(string message);
+        void keyboardModeOpen();
+        void keyboardModeWB();
+        void keyboardModeNB();
+        void keyboardModeClose();
+        void keyboardModePrint(std::string message);
         
         void printLoseScreen(Player pl);
         void printWinScreen(Player pl);
         void printRespawnCountdown();
 
-        string takeCmdInput(string promptMessage);
+        std::string takeCmdInput(std::string promptMessage);
 };
 
 #endif

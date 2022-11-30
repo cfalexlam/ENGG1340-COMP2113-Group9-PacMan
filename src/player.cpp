@@ -8,9 +8,11 @@ Player::Player(std::string plname){
     score = new int[level];
     scoreSum = 0;
 
-    name = plname;
+    this->playername = playername;
 }
-
+std::string Player::getName(){
+	return this->playername;
+}
 int Player::getScore(){
     return scoreSum;
 }

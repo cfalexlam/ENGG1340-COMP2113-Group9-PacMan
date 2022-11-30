@@ -4,7 +4,7 @@
 #include <string>
 class Player{
     public:
-        Player(std::string plname);
+        Player(std::string playername);
 
         // score manipulation
         int getScore();
@@ -17,13 +17,15 @@ class Player{
         // lives manipulation
         int getLives();
         void loseLife();
+        
+        std::string getName();
     private:
         int level;
         int lives;
         int* score;
         int scoreSum;
 
-        std::string name;
+        std::string playername;
 };
 
 #endif

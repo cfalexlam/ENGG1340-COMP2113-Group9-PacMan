@@ -12,23 +12,23 @@ Ghost::Ghost(Maze *m, int row, int col){
   this->currentPosition[1] = col;
 }
 
-void Ghost::setPosition(int row, int col)
+void Ghost::setCurrentPosition(int row, int col)
 {
   this->currentPosition[0] = row;
   this->currentPosition[1] = col;
 }
 
-void Ghost::setVelocity(int row, int col){
+void Ghost::setCurrentVelocity(int row, int col){
   this->currentVelocity[0] = row;
   this->currentVelocity[1] = col;
 }
 
-int* Ghost::getVelocity()
+int* Ghost::getCurrentVelocity()
 {
   return this->currentVelocity;
 }
 
-int* Ghost::getPosition()
+int* Ghost::getCurrentPosition()
 {
   return this->currentPosition;
 }
