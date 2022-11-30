@@ -49,7 +49,7 @@ bool MainGame::mainLoop() {
     screen.keyboardModeWB();
     screen.keyboardModePrint("Hi " + player.getName() + "! Are you ready? (Press any key to continue)");
     getch();
-    screen.keyboardModeWB();
+    screen.keyboardModeNB();
 
     int input;
     // Main game logic
@@ -57,6 +57,7 @@ bool MainGame::mainLoop() {
         clear();
         maze.printMaze();
         // Get user input from keyboard
+        printw("%d %d \n",maze.pacman.getCurrentPosition()[0],maze.pacman.getCurrentPosition()[1]);
         input = getch();
         if (input == int('q')) {
             screen.keyboardModeClose();
@@ -78,12 +79,14 @@ bool MainGame::mainLoop() {
                 maze.pacman.setPresumedVelocity(0,1);
                 break;
         }
-
+        
         // Only update the actual velocities of pacman if the instruction is valid, i.e. the pacman is not bumping into a wall
         if (! maze.isWall(maze.pacman.getCurrentPosition()[0] + maze.pacman.getPresumedVelocity()[0], maze.pacman.getCurrentPosition()[1]+maze.pacman.getPresumedVelocity()[1])) {
             maze.pacman.setCurrentVelocity(maze.pacman.getPresumedVelocity()[0] , maze.pacman.getPresumedVelocity()[1]);
         }
- 
+        if (maze.isWall(maze.pacman.getCurrentPosition()[0] + maze.pacman.getCurrentVelocity()[0], maze.pacman.getCurrentPosition()[1]+maze.pacman.getCurrentVelocity()[1])) {
+            maze.pacman.setCurrentVelocity(0,0);
+        }
         // Update velocities of ghosts if it moves towards a wall, or has a velocity of {0, 0}
 
 
@@ -137,7 +140,12 @@ bool MainGame::mainLoop() {
         for (int i=0;i<maze.pellets.size();i++)
         	if (maze.pellets[i].getPosition()[0] == maze.pacman.getPresumedPosition()[0],
         	    maze.pellets[i].getPosition()[1] == maze.pacman.getPresumedPosition()[1])
-            		maze.pacman.strong = 20;
+                {
+                    maze.pacman.strong = 100;
+                    break;
+
+                }
+            		
 
         // Update the position representation of Pacman and Ghost in the maze
         maze.movePacman(maze.pacman.getCurrentPosition(),maze.pacman.getPresumedPosition());
@@ -166,7 +174,7 @@ bool MainGame::mainLoop() {
 
         // Update position stored in the pacman object
         maze.pacman.setCurrentPosition(maze.pacman.getPresumedPosition()[0],maze.pacman.getPresumedPosition()[1]);
-
+        
         // 0.2 second of delay for each looo
         usleep(0.2 * 1000000);
 
@@ -181,13 +189,3 @@ bool collision(Ghost& ghost, Pacman& pacman) {
     return (ghost.getCurrentPosition()[0] + ghost.getCurrentVelocity()[0] == pacman.getPresumedPosition()[0] && ghost.getCurrentPosition()[1] + ghost.getCurrentVelocity()[1] == pacman.getPresumedPosition()[1]);
     //|| (ghost.getPosition()[0] + ghost.getVelocity()[0] == pacman.getPosition()[0] && ghost.getPosition()[1] + ghost.getVelocity()[1] == pacman.getPosition()[1])
 }   // second expression is redundant, with extra case included (e.g. a ghost and a pacman moving in the same direction, while being adjacent to each other)
-
-
-
-
-
-
-
-
-
-
