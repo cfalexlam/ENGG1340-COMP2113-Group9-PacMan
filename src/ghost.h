@@ -16,7 +16,7 @@ class Ghost{
     // Reset position of ghost
     void respawn();
     int initPosition[2];
-    char liftedObject;
+    char liftedObject = ' ';
   private:
     
     int currentPosition[2];
