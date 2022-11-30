@@ -17,42 +17,57 @@ Maze::Maze(std::string filename) {
     std::ifstream fin;
     fin.open(filename); //later change to ".//map//filename.txt"
 
-    if (fin.fail()) { // file not exist;
+    /*if (fin.fail()) { // file not exist;
     	return;
     }
-    std::string line, row, col;
+    */
+    std::string line;
+    int row, col;
     std::istringstream linein;
 
     getline(fin, line); // Read in pacman position
     linein.str(line);
     linein >> row >> col;
 
-    pacman.initPosition[0] = stoi(row);
-    pacman.initPosition[1] = stoi(col);
-    pacman.setCurrentPosition(stoi(row), stoi(col));
+    pacman.initPosition[0] = row;
+
+    pacman.initPosition[1] = col;
+
+    pacman.setCurrentPosition(row, col);
+
+
     linein.clear();
 
     getline(fin, line); // Read in ghost positions
 
+    cout << "1" << endl;
+
     for (int i = 0, j = stoi(line); i < j; i++) {
         getline(fin, line);
         linein.str(line);
         linein >> row >> col;
-
-        Ghost ghost(this,stoi(row), stoi(col));
+        cout << "2" << endl;
+        Ghost ghost(this,row, col);
+        cout << "3" << endl;
         ghosts.push_back(ghost);
+        cout << "4" << endl;
         linein.clear();
+        cout << "5" << endl;
     }
 
+    cout << "2" << endl;
+
     getline(fin, line); // Read in power pellet positions
+        cout << "3" << endl;
     for (int i = 0, j = stoi(line); i < j; i++) {
         getline(fin, line);
         linein.str(line);
         linein >> row >> col;
-	Pellet pellet(stoi(row), stoi(col));// Store positions in power pellets
+	Pellet pellet(row, col);// Store positions in power pellets
         pellets.push_back(pellet);
         linein.clear();
     }
+    cout << "4" << endl;
 
     int i = 0; // Read in the map
     while (getline(fin, line)) {

@@ -14,12 +14,12 @@ class Pacman{
 
     // Invulnerable state counter
     int strong;
-    int* initPosition;
+    int initPosition[2];
   private:
-    int* currentPosition;
-    int* currentVelocity;
-    int* presumedPosition;
-    int* presumedVelocity;
+    int currentPosition[2];
+    int currentVelocity[2];
+    int presumedPosition[2];
+    int presumedVelocity[2]={0,0};
     
     
   

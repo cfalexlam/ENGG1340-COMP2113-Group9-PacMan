@@ -38,7 +38,7 @@ bool MainGame::mainLoop() {
     Player player(playername);
     string filename;
     
-    Maze maze("map1.txt");
+    Maze maze("../map/map1.txt");
     
     /*do{
         filename = screen.takeCmdInput("Please enter the filename of the maze: ");
@@ -49,14 +49,14 @@ bool MainGame::mainLoop() {
     screen.keyboardModeWB();
     screen.keyboardModePrint("Hi " + player.getName() + "! Are you ready? (Press any key to continue)");
     getch();
-    screen.keyboardModeNB();
+    screen.keyboardModeWB();
 
+    int input;
     // Main game logic
     while (1) {
+        clear();
         maze.printMaze();
-
         // Get user input from keyboard
-        int input;
         input = getch();
         if (input == int('q')) {
             screen.keyboardModeClose();
@@ -80,18 +80,23 @@ bool MainGame::mainLoop() {
         }
 
         // Only update the actual velocities of pacman if the instruction is valid, i.e. the pacman is not bumping into a wall
-        if (! maze.isWall(maze.pacman.getCurrentPosition()[0] + maze.pacman.getPresumedVelocity()[0], maze.pacman.getCurrentPosition()[1] +    maze.pacman.getPresumedVelocity()[1])) 
+        if (! maze.isWall(maze.pacman.getCurrentPosition()[0] + maze.pacman.getPresumedVelocity()[0], maze.pacman.getCurrentPosition()[1]+maze.pacman.getPresumedVelocity()[1])) {
             maze.pacman.setCurrentVelocity(maze.pacman.getPresumedVelocity()[0] , maze.pacman.getPresumedVelocity()[1]);
-
+        }
+ 
         // Update velocities of ghosts if it moves towards a wall, or has a velocity of {0, 0}
+
+
         for (int i=0; i<maze.ghosts.size(); i++){
+
             if ((maze.ghosts[i].getCurrentVelocity()[0] == 0 && maze.ghosts[i].getCurrentVelocity()[1] == 0) ||
                 (maze.isWall(maze.ghosts[i].getCurrentPosition()[0] + maze.ghosts[i].getCurrentVelocity()[0],
                           maze.ghosts[i].getCurrentPosition()[1] + maze.ghosts[i].getCurrentVelocity()[1]))) {
                     maze.ghosts[i].setRandomVelocity();
+                    
                 }
         }
-        
+
         // Check if pacman is bumping into any of the ghosts
         for (int i = 0; i < maze.ghosts.size(); i++) {
             if (collision(maze.ghosts[i], maze.pacman) and maze.pacman.strong == 0) {

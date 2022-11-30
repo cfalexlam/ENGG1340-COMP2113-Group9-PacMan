@@ -15,12 +15,12 @@ class Ghost{
     
     // Reset position of ghost
     void respawn();
-    int* initPosition;
+    int initPosition[2];
     char liftedObject;
   private:
     
-    int* currentPosition;
-    int* currentVelocity;
+    int currentPosition[2];
+    int currentVelocity[2]={0,0};
     
     Maze* m;
   
