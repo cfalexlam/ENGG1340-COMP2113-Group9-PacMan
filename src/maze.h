@@ -24,9 +24,8 @@ class Maze{
         std::vector<Ghost> ghosts;
         std::vector<Pellet> pellets;
 
-        // Class constructor to load maze from templates
-        // https://softwareengineering.stackexchange.com/questions/388977/how-to-reach-the-parent-object
-        Maze(std::string filename): Ghost(*this);
+        // Load maze
+        bool loadFile(std::string filename);
 
         // Check identity of each grid
         bool isWall(int row, int col);
@@ -37,7 +36,7 @@ class Maze{
         void printMaze();
 
         // Update position of pacman
-        void movePacman(int row,int col, int nrow,int ncol);
+        void movePacman(int row, int col, int nrow, int ncol);
         void moveGhost();
 
         // Return the number of remaining food

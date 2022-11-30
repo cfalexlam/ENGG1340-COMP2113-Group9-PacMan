@@ -2,13 +2,13 @@
 #include <cstring>
 #include "player.h"
 
-Player::Player(char* name){
-    int level = 1;
-    int lives = 3;
-    int *score = new int[level];
-    int scoreSum = 0;
+Player::Player(std::string plname){
+    level = 1;
+    lives = 3;
+    score = new int[level];
+    scoreSum = 0;
 
-    char* name = name;
+    name = plname;
 }
 
 int Player::getScore(){

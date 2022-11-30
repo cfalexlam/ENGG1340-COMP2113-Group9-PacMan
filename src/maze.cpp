@@ -2,6 +2,8 @@
 
 #include <fstream>
 
+#include <string>
+
 #include <sstream>
 
 char WALL = '=';
@@ -11,12 +13,12 @@ char SPACE = ' ';
 char GHOST = 'Q';
 char PELLETS = 'O';
 
-void Maze::Maze(std::string filename) {
+bool Maze::loadFile(std::string filename) {
     std::ifstream fin;
     fin.open(filename); //later change to ".//map//filename.txt"
 
     if (fin.fail()) { // file not exist;
-        return;
+        return false;
     }
     std::string line, row, col;
     std::istringstream linein;
@@ -74,6 +76,7 @@ void Maze::Maze(std::string filename) {
     }
     maze[pacman.getPosition()[0]][pacman.getPosition()[1]] = PLAYER;
     food -= 1;
+    return true;
 }
 
 void Maze::printMaze() {
@@ -123,14 +126,14 @@ void Maze::respawnSameLevel(){
     }
 }
 
-bool Maze::isWall(int row, int col) {
+bool Maze::isWall(int& row, int& col) {
     return maze[row][col] == WALL;
 }
 
-bool Maze::isGhost(int row, int col) {
+bool Maze::isGhost(int& row, int& col) {
     return maze[row][col] == GHOST;
 }
 
-bool Maze::isFood(int row, int col) {
+bool Maze::isFood(int& row, int& col) {
     return maze[row][col] == FOOD;
 }

@@ -41,3 +41,12 @@ void ScreenRenderer::printWinScreen(Player pl) {
   printw("CONGRATULATION! YOU WIN!\n");
   printw("Your total score is %d \n", pl.getScore());
 }
+
+string takeCmdInput(string promptMessage){
+    cout << promptMessage;
+    
+    string x;    
+    cin >> x;
+    
+    return x;
+}

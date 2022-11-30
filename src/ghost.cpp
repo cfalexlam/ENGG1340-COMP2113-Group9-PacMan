@@ -3,8 +3,9 @@
 #include <random>
 #include <vector>
 
-Ghost::Ghost(Maze &m, int row, int col){
+Ghost::Ghost(Maze *m, int row, int col){
   // Initialize member properties
+  this->m = m;
   this->initPosition[0] = row;
   this->initPosition[1] = col;
   this->currentPosition[0] = row;
@@ -36,16 +37,16 @@ void Ghost::setRandomVelocity(){
   /* Generate random directions of movement */
   std::vector<int> validDirections;
   int numberOfValidDirections = 0;
-  if (!m.isWall(currentPosition[0]+1, currentPosition[1])){
+  if (!m->isWall(currentPosition[0]+1, currentPosition[1])){
     validDirections.push_back(0);
   }
-  if (!m.isWall(currentPosition[0]-1, currentPosition[1])){
+  if (!m->isWall(currentPosition[0]-1, currentPosition[1])){
     validDirections.push_back(1);
   }
-  if (!m.isWall(currentPosition[0], currentPosition[1]+1)){
+  if (!m->isWall(currentPosition[0], currentPosition[1]+1)){
     validDirections.push_back(2);
   }
-  if (!m.isWall(currentPosition[0], currentPosition[1]-1)){
+  if (!m->isWall(currentPosition[0], currentPosition[1]-1)){
     validDirections.push_back(3);
   }
 

@@ -18,6 +18,8 @@ class ScreenRenderer{
         void printLoseScreen(Player pl);
         void printWinScreen(Player pl);
         void printRespawnCountdown();
+
+        string takeCmdInput(string promptMessage);
 };
 
 #endif

@@ -16,6 +16,12 @@
 
 #include "ghost.h"
 
+#include "maingame.h"
+
+MainGame::MainGame(std::string playername){
+    plname = playername;
+}
+
 bool MainGame::mainLoop() {
     /*
         Runs the main game loop.
@@ -26,16 +32,21 @@ bool MainGame::mainLoop() {
 
     // Initialize screen renderer
     ScreenRenderer s;
-    Player pl(playername);
+    Player pl(plname);
     std::string fn;
-    fn = s.takeCmdInput("Please enter the filename of the maze: ");
-    Maze m(fn);
+    Maze m;
+    std::string filename;
+    
+    do{
+        filename = s.takeCmdInput("Please enter the filename of the maze: ");
+    }
+    while (!m.loadFile(filename));
 
-    screen.KeyboardModeOpen();
-    screen.KeyboardModeWB();
-    screen.KeyboardModePrint("Hi " + pl.getName() + "! Are you ready? (Press any key to continue)");
+    s.KeyboardModeOpen();
+    s.KeyboardModeWB();
+    s.KeyboardModePrint("Hi " + pl.getName() + "! Are you ready? (Press any key to continue)");
     getch();
-    screen.KeyboardModeNB();
+    s.KeyboardModeNB();
 
     int presumedVelocity[2] = {
         0,
