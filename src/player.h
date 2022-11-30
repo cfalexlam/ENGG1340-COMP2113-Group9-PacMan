@@ -1,9 +1,10 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <string>
 class Player{
     public:
-        Player(char* name);
+        Player(std::string plname);
 
         // score manipulation
         int getScore();
@@ -22,7 +23,7 @@ class Player{
         int* score;
         int scoreSum;
 
-        char* name;
+        std::string name;
 };
 
 #endif
