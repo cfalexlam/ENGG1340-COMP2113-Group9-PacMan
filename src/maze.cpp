@@ -1,11 +1,11 @@
 #include "maze.h"
-
+#include <iostream>
 #include <fstream>
 
 #include <string>
 
 #include <sstream>
-using namespace std;
+
 char WALL = '=';
 char FOOD = '.';
 char PLAYER = 'X';
@@ -18,6 +18,7 @@ Maze::Maze(std::string filename) {
     fin.open(filename); //later change to ".//map//filename.txt"
 
     if (fin.fail()) { // file not exist;
+    	return;
     }
     std::string line, row, col;
     std::istringstream linein;
@@ -25,6 +26,7 @@ Maze::Maze(std::string filename) {
     getline(fin, line); // Read in pacman position
     linein.str(line);
     linein >> row >> col;
+
     pacman.initPosition[0] = stoi(row);
     pacman.initPosition[1] = stoi(col);
     pacman.setCurrentPosition(stoi(row), stoi(col));
@@ -81,6 +83,7 @@ void Maze::printMaze() {
     for (int row = 0; row < maze.size(); row++) {
         for (int col = 0; col < maze[0].size(); col++)
             printw("%c ", maze[row][col]);
+        printw("\n");
     }
 }
 int Maze::foodLeft() {
