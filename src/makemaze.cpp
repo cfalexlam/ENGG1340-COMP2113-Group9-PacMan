@@ -3,10 +3,11 @@
 #include <ncurses.h>
 #include <unistd.h>
 #include <fstream>
+#include "makemaze.h"
 using namespace std;
 
 void savemap(int l,int w, vector<vector<char> > map);
-void countNo(vector <vector <char> > map, char find);
+
 
 void printmap(int l,int w, vector< vector<char> > map,int pointerRow, int pointerCol)
 {
@@ -20,7 +21,7 @@ void printmap(int l,int w, vector< vector<char> > map,int pointerRow, int pointe
 		printw("\n");
 	}
 }
-int main(){
+int makemaze(){
 	vector<vector<char> > map;
 	int length,width;
 	int pointerRow=1,pointerCol=1;
@@ -164,5 +165,3 @@ void savemap(int l,int w, vector<vector<char> > map) {
 
     fout.close();
 }
-
-

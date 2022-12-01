@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include "makemaze.h"
 #include "maingame.h"
 using namespace std;
 
@@ -17,7 +18,7 @@ int main(){
         string playername;
         playername = takeCmdInput("Input your name");
       
-        printFile("../map/mapname.txt");
+        printFile("../map/maplist.txt");
         string filename;
         filename = takeCmdInput("Choose a map to play");
 
@@ -26,6 +27,10 @@ int main(){
     }
     if (command=="r") //show rule
       {}
+
+    if (command == "m") {
+        makemaze();
+    }
       
   }
   while (command!="q");
