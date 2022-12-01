@@ -21,7 +21,7 @@ int main(){
         string filename;
         filename = takeCmdInput("Choose a map to play");
 
-        MainGame game(playername);
+        MainGame game(playername, filename);
         while (game.mainLoop());
     }
     if (command=="r") //show rule
