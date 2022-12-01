@@ -15,12 +15,13 @@ void Pacman::setPresumedVelocity(int row, int col){
   this->presumedVelocity[0] = row;
   this->presumedVelocity[1] = col;
 }
-
+void Pacman::setPresumedPosition(){
+	this->presumedPosition[0] = this->currentPosition[0] + this->currentVelocity[0];
+	this->presumedPosition[1] = this->currentPosition[1] + this->currentVelocity[1];
+}
 int* Pacman::getPresumedPosition(){
-	static int temp[2] = {0,0};
-	temp[0] = this->currentPosition[0] + this->currentVelocity[0];
-	temp[1] = this->currentPosition[1] + this->currentVelocity[1];
-	return temp;
+	this->setPresumedPosition();
+	return this->presumedPosition;
 }
 
 int* Pacman::getCurrentVelocity()
