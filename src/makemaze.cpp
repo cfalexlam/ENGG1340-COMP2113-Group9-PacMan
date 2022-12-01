@@ -48,7 +48,7 @@ int makemaze(){
 	do
 	{
         
-		clear();
+        clear();
         printw("Rules:\n1. Use up down left right to control the place to insert character.\n");
         printw("2. Type G, X, O and = to insert ghosst, player, pellets and walls respectively.\n");
         printw("3. Do not insert more than 1 player.\n");
