@@ -38,16 +38,21 @@ int makemaze(){
 			else
 				temp.push_back('_');
 		map.push_back(temp);
-	}
+	} 
+
 	int input;
 	initscr();
-	noecho();
-	keypad(stdscr,true);
+    noecho();
+    keypad(stdscr,true);
 	nodelay(stdscr,false);
 	do
 	{
-		
+        
 		clear();
+        printw("Rules:\n1. Use up down left right to control the place to insert character.\n");
+        printw("2. Type G, X, O and = to insert ghosst, player, pellets and walls respectively.\n");
+        printw("3. Do not insert more than 1 player.\n");
+        printw("\n");
 		printmap(length,width,map,pointerRow,pointerCol);
 		printw("input: ");
 		input = getch();
