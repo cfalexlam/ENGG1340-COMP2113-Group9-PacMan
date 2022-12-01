@@ -16,6 +16,7 @@ class Pacman{
     int strong;
     int initPosition[2];
   private:
+    void setPresumedPosition();
     int currentPosition[2];
     int currentVelocity[2];
     int presumedPosition[2];
