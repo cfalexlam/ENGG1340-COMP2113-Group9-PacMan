@@ -88,6 +88,7 @@ int makemaze(){
 	echo();
 	endwin();
     savemap(length, width, map);
+    clear();
 	return 1;
 }
 
