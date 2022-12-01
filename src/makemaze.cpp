@@ -3,7 +3,7 @@
 #include <ncurses.h>
 #include <unistd.h>
 using namespace std;
-void printmap(int l,int w, vector<vector<char>> map,int pointerRow, int pointerCol)
+void printmap(int l,int w, vector<vector<char> > map,int pointerRow, int pointerCol)
 {
 	for (int i=0;i<l;i++)
 	{
@@ -16,7 +16,7 @@ void printmap(int l,int w, vector<vector<char>> map,int pointerRow, int pointerC
 	}
 }
 int main(){
-	vector<vector<char>> map;
+	vector<vector<char> > map;
 	int length,width;
 	int pointerRow=1,pointerCol=1;
 	cout << "Length: ";

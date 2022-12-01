@@ -17,7 +17,7 @@ using namespace std;
 class Maze{
     public:
         // Storing the maze structure in a 2D vector
-        vector<vector <char>> maze;
+        vector<vector <char> > maze;
 
         // Storing the positions of pacman, ghosts and pellets
         Pacman pacman;
