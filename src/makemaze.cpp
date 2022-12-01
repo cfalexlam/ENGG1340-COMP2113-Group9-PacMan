@@ -4,6 +4,10 @@
 #include <unistd.h>
 #include <fstream>
 using namespace std;
+
+void savemap(int l,int w, vector<vector<char> > map);
+void countNo(vector <vector <char> > map, char find);
+
 void printmap(int l,int w, vector< vector<char> > map,int pointerRow, int pointerCol)
 {
 	for (int i=0;i<l;i++)
@@ -69,6 +73,9 @@ int main(){
 			case int('X'): case int('x'):
 				map[pointerRow][pointerCol] = 'X';
 				break;
+			case int('O'):
+				map[pointerRow][pointerCol] = 'O';
+				break;
 			case KEY_BACKSPACE:
 				map[pointerRow][pointerCol] = '_';
 				break;
@@ -102,19 +109,37 @@ void savemap(int l,int w, vector<vector<char> > map) {
         }
     }
 
-    int NoGhost = 0;
-    vector <vector <int> > ghosts;
-    vector <int> ghost;
-    for (int i=0; i<map.size(); i++) {
+    fout.close();
+
+    countNo(map, 'G');
+    countNo(map, 'O');
+    
+    for ()
+
+}
+
+void countNo(vector <vector <char> > map, char find) {
+    ofstream fout;
+    fout.open("../map/playermap.txt", ios::app);
+
+    int NoTarget = 0;
+    vector <vector <int> > targets;
+    for (int i = 0; i < map.size(); i++) {
         for (int j=0; j<map[i].size(); j++) {
-            if (map[i][j] == 'G') {
-                NoGhost += 1;
-                ghost.push_back(i);
-                ghost.push_back(j);
-                ghosts.push_back(ghost);
+            if (map[i][j] == find) {
+                vector <int> target;
+                NoTarget += 1;
+
+                target.push_back(i);
+                target.push_back(j);
+
+                targets.push_back(target);
             }
         }
     }
-    fout << NoGhost << endl;
-}
+    fout << NoTarget << endl;
 
+    for (int  i= 0; i < targets.size(); i++) {
+        fout << targets[i][0] << ' ' << targets[i][1] << endl;
+    }
+}

@@ -10,6 +10,8 @@ maze.o: maze.cpp maze.h
 	g++ -c maze.cpp
 player.o: player.cpp player.h
 	g++ -c player.cpp
+makemaze: makemaze.cpp
+	g++ makemaze.cpp -o makemaze -lncurses
 maingame.o: maingame.cpp maingame.h
 	g++ -c maingame.cpp
 main.o: main.cpp 
