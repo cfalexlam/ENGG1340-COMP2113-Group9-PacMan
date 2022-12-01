@@ -4,15 +4,11 @@
 1 49   //spawn point of ghost2
 11 1   //spawn point of ghost3
 11 49  //spawn point of ghost4
-7      //number of powerpellets
+4      //number of powerpellets
 4 6    //coordinate of powerpellets1
-8 6    //coordinate of powerpellets2
-5 16   //coordinate of powerpellets3
-7 16   //coordinate of powerpellets4
-6 25   //coordinate of powerpellets5
-6 34   //coordinate of powerpellets6
-6 43   //coordinate of powerpellets6
-
+5 16   //coordinate of powerpellets2
+7 16   //coordinate of powerpellets3
+6 34   //coordinate of powerpellets4
 ===================================================
 =.................................................=
 =.................................................=
