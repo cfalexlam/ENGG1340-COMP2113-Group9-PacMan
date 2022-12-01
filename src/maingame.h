@@ -7,7 +7,7 @@ using namespace std;
 class MainGame{
     public:
         // Run the main game loop
-        MainGame(std::string playername);
+        MainGame(std::string playername, std::string filename);
         string playername;
         bool mainLoop();
 };
