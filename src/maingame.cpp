@@ -21,8 +21,9 @@ using namespace std;
 
 bool collision(Ghost& ghost, Pacman& pacman);
 
-MainGame::MainGame(string playername){
+MainGame::MainGame(string playername, string filename){
     this->playername = playername;
+    this->filename = filename;
 }
 
 bool MainGame::mainLoop() {
@@ -38,7 +39,7 @@ bool MainGame::mainLoop() {
     Player player(playername);
     string filename;
     
-    Maze maze("../map/map1.txt");
+    Maze maze("../map/"+filename);
     
     /*do{
         filename = screen.takeCmdInput("Please enter the filename of the maze: ");
