@@ -14,11 +14,15 @@ int main(){
     command = takeCmdInput("Input your choice");
     if (command=="p") // start game
     {
-      string playername;
-      playername = takeCmdInput("Input your name");
+        string playername;
+        playername = takeCmdInput("Input your name");
+      
+        printFile("../map/mapname.txt");
+        string filename;
+        filename = takeCmdInput("Choose a map to play");
 
-      MainGame game(playername);
-      while (game.mainLoop());
+        MainGame game(playername);
+        while (game.mainLoop());
     }
     if (command=="r") //show rule
       {}
