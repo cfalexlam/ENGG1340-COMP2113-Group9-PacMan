@@ -6,7 +6,7 @@
 
 class Player;
 
-class ScreenRenderer{
+class ScreenRenderer {
     public:
         void keyboardModeOpen();
         void keyboardModeWB();

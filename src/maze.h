@@ -23,7 +23,7 @@ class Maze{
         Pacman pacman;
         vector<Ghost> ghosts;
         vector<Pellet> pellets;
-	
+
         // Load maze
         Maze(string filename);
 
@@ -52,7 +52,7 @@ class Maze{
 
         // Update states of entities (TBC)
         void updateStates();
-	int food=0;
+        int food=0;
     private:
         // Store number of food
         

@@ -99,9 +99,8 @@ bool MainGame::mainLoop() {
 
             if ((maze.ghosts[i].getCurrentVelocity()[0] == 0 && maze.ghosts[i].getCurrentVelocity()[1] == 0) ||
                 (maze.isWall(maze.ghosts[i].getCurrentPosition()[0] + maze.ghosts[i].getCurrentVelocity()[0],
-                          maze.ghosts[i].getCurrentPosition()[1] + maze.ghosts[i].getCurrentVelocity()[1]))) {
-                    maze.ghosts[i].setRandomVelocity();
-                    
+                maze.ghosts[i].getCurrentPosition()[1] + maze.ghosts[i].getCurrentVelocity()[1]))) {
+                    maze.ghosts[i].setRandomVelocity();    
                 }
         }
 

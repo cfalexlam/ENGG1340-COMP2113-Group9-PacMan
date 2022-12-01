@@ -3,7 +3,7 @@
 
 
 class Pacman{
-  public:
+public:
     void setCurrentVelocity(int row, int col);
     void setCurrentPosition(int row, int col);
     void setPresumedVelocity(int row,int col);
@@ -15,13 +15,13 @@ class Pacman{
     // Invulnerable state counter
     int strong=0;
     int initPosition[2];
-  private:
+private:
     int currentPosition[2];
     int currentVelocity[2];
     int presumedPosition[2];
     int presumedVelocity[2]={0,0};
     
     
-  
+
 };
 #endif

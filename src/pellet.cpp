@@ -11,6 +11,6 @@ int* Pellet::getPosition()
 }
 
 void Pellet::setPosition(int row, int col) {
-  this->position[0] = row;
-  this->position[1] = col;
+    this->position[0] = row;
+    this->position[1] = col;
 }

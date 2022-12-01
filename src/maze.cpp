@@ -1,9 +1,7 @@
 #include "maze.h"
 #include <iostream>
 #include <fstream>
-
 #include <string>
-
 #include <sstream>
 
 char WALL = '=';
@@ -58,7 +56,7 @@ Maze::Maze(std::string filename) {
         getline(fin, line);
         linein.str(line);
         linein >> row >> col;
-				Pellet pellet(row, col);// Store positions in power pellets
+        Pellet pellet(row, col);// Store positions in power pellets
         pellets.push_back(pellet);
         linein.clear();
     }
@@ -68,19 +66,22 @@ Maze::Maze(std::string filename) {
     while (getline(fin, line)) {
         std::vector < char > temp;
         maze.push_back(temp);
-        for (int j = 0; j < line.size(); j++)
+        for (int j = 0; j < line.size(); j++) {
             if (line[j] == WALL)
                 maze[i].push_back(WALL);
             else {
                 maze[i].push_back(FOOD);
                 food += 1;
             }
+        }
         i += 1;
     }
+
     for (int i = 0; i < pellets.size(); i++) {
         maze[pellets[i].getPosition()[0]][pellets[i].getPosition()[1]] = PELLETS;
         food -= 1;
     }
+
     for (int i = 0; i < ghosts.size(); i++) {
         maze[ghosts[i].getCurrentPosition()[0]][ghosts[i].getCurrentPosition()[1]] = GHOST;
         food -= 1;
@@ -120,8 +121,8 @@ void Maze::moveGhost(){
 }
 
 void Maze::respawnGhost(Ghost ghost){
-		if (! maze[ghost.getCurrentPosition()[0]][ghost.getCurrentPosition()[1]] == GHOST)
-    	maze[ghost.getCurrentPosition()[0]][ghost.getCurrentPosition()[1]] = ghost.liftedObject;
+    if (! maze[ghost.getCurrentPosition()[0]][ghost.getCurrentPosition()[1]] == GHOST)
+        maze[ghost.getCurrentPosition()[0]][ghost.getCurrentPosition()[1]] = ghost.liftedObject;
     ghost.liftedObject = ' ';
     maze[ghost.initPosition[0]][ghost.initPosition[1]] = GHOST;
     

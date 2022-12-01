@@ -8,9 +8,9 @@ void printStartMenu();
 string takeCmdInput(string prompt);
 void printFile(const string& fileName);
 
-int main(){
-  string command;
-  do{
+int main() {
+    string command;
+  do {
     printStartMenu();
     command = takeCmdInput("Input your choice");
     if (command=="p") // start game
@@ -25,22 +25,25 @@ int main(){
         MainGame game(playername, filename);
         game.mainLoop();
     }
-    if (command=="r") //show rule
-      {}
+    if (command=="r") // show rule form file
+    {
+        printFile("../templates/gamerule.txt");
+        takeCmdInput("Press any key to quit");
+    }
 
     if (command == "m") {
         makemaze();
     }
       
   }
-  while (command!="q");
-  return 1;
+    while (command!="q");
+    return 1;
 }
 
 void printStartMenu() {
-  system("clear");
-  printFile("../templates/welcome.txt");
-  printFile("../templates/command.txt");
+    system("clear");
+    printFile("../templates/welcome.txt");
+    printFile("../templates/command.txt");
 }
 
 string takeCmdInput(string prompt) {
@@ -51,14 +54,14 @@ string takeCmdInput(string prompt) {
 }
 
 void printFile(const string& fileName) {
-  ifstream fin(fileName);
+    ifstream fin(fileName);
 
-  if (fin.fail()) {
-    return;
-  }
+    if (fin.fail()) {
+        return;
+    }
 
-  string line;
-  while (getline(fin, line))
-    cout << line << endl;
-  fin.close();
+    string line;
+    while (getline(fin, line))
+        cout << line << endl;
+    fin.close();
 }
