@@ -2,8 +2,9 @@
 #include <vector>
 #include <ncurses.h>
 #include <unistd.h>
+#include <fstream>
 using namespace std;
-void printmap(int l,int w, vector<vector<char> > map,int pointerRow, int pointerCol)
+void printmap(int l,int w, vector< vector<char> > map,int pointerRow, int pointerCol)
 {
 	for (int i=0;i<l;i++)
 	{
@@ -78,6 +79,42 @@ int main(){
 	while (input != 'q');
 	echo();
 	endwin();
+    savemap(length, width, map);
 	return 1;
+}
+
+
+void savemap(int l,int w, vector<vector<char> > map) {
+    // check position of player
+    ofstream fout;
+    fout.open("../map/playermap.txt");
+
+    if (fout.fail()){       
+		cout << "Fail to create map" << endl;
+		exit(1);     
+	}
+
+    for (int i=0; i<map.size(); i++) {
+        for (int j=0; j<map[i].size(); j++) {
+            if (map[i][j] == 'X') {
+                fout << i << ' ' << j << endl;  
+            }
+        }
+    }
+
+    int NoGhost = 0;
+    vector <vector <int> > ghosts;
+    vector <int> ghost;
+    for (int i=0; i<map.size(); i++) {
+        for (int j=0; j<map[i].size(); j++) {
+            if (map[i][j] == 'G') {
+                NoGhost += 1;
+                ghost.push_back(i);
+                ghost.push_back(j);
+                ghosts.push_back(ghost);
+            }
+        }
+    }
+    fout << NoGhost << endl;
 }
 

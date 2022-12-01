@@ -37,7 +37,6 @@ bool MainGame::mainLoop() {
     // Initialize screen renderer
     ScreenRenderer screen;
     Player player(playername);
-    string filename;
     
     Maze maze("../map/"+filename);
     
