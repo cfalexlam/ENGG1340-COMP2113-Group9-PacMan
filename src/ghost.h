@@ -11,6 +11,7 @@ class Ghost{
     void setCurrentPosition(int row, int col);
     int* getCurrentVelocity();
     int* getCurrentPosition();
+    int* getPresumedPosition();
     void setRandomVelocity();
     
     // Reset position of ghost
@@ -18,10 +19,9 @@ class Ghost{
     int initPosition[2];
     char liftedObject = ' ';
   private:
-    
     int currentPosition[2];
     int currentVelocity[2]={0,0};
-    
+    int presumedPosition[2];
     Maze* m;
   
 };

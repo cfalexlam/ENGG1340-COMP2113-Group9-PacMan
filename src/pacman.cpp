@@ -6,21 +6,22 @@ void Pacman::setCurrentPosition(int row, int col)
   this->currentPosition[1] = col;
 }
 
-void Pacman::setCurrentVelocity(int row, int col){
+void Pacman::setCurrentVelocity(int row, int col)
+{
   this->currentVelocity[0] = row;
   this->currentVelocity[1] = col;
 }
 
-void Pacman::setPresumedVelocity(int row, int col){
+void Pacman::setPresumedVelocity(int row, int col)
+{
   this->presumedVelocity[0] = row;
   this->presumedVelocity[1] = col;
 }
-void Pacman::setPresumedPosition(){
+
+int* Pacman::getPresumedPosition()
+{
 	this->presumedPosition[0] = this->currentPosition[0] + this->currentVelocity[0];
 	this->presumedPosition[1] = this->currentPosition[1] + this->currentVelocity[1];
-}
-int* Pacman::getPresumedPosition(){
-	this->setPresumedPosition();
 	return this->presumedPosition;
 }
 

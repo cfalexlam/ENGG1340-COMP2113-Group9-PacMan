@@ -39,26 +39,21 @@ Maze::Maze(std::string filename) {
     linein.clear();
 
     getline(fin, line); // Read in ghost positions
-
-    cout << "1" << endl;
-
     for (int i = 0, j = stoi(line); i < j; i++) {
         getline(fin, line);
         linein.str(line);
         linein >> row >> col;
-        cout << "2" << endl;
         Ghost ghost(this,row, col);
-        cout << "3" << endl;
+
         ghosts.push_back(ghost);
-        cout << "4" << endl;
+
         linein.clear();
-        cout << "5" << endl;
     }
 
-    cout << "2" << endl;
+
 
     getline(fin, line); // Read in power pellet positions
-        cout << "3" << endl;
+
     for (int i = 0, j = stoi(line); i < j; i++) {
         getline(fin, line);
         linein.str(line);
@@ -67,7 +62,7 @@ Maze::Maze(std::string filename) {
         pellets.push_back(pellet);
         linein.clear();
     }
-    cout << "4" << endl;
+
 
     int i = 0; // Read in the map
     while (getline(fin, line)) {
@@ -111,10 +106,11 @@ void Maze::movePacman(int* currentPosition, int* presumedPosition) {
 
 void Maze::moveGhost(){
     for (int i=0; i<ghosts.size(); i++){
-        int newPosX = ghosts[i].getCurrentPosition()[0] + ghosts[i].getCurrentVelocity()[0];
-        int newPosY = ghosts[i].getCurrentPosition()[1] + ghosts[i].getCurrentVelocity()[1];
-
         maze[ghosts[i].getCurrentPosition()[0]][ghosts[i].getCurrentPosition()[1]] = ghosts[i].liftedObject;
+    }
+    for (int i=0; i<ghosts.size(); i++){
+        int newPosX = ghosts[i].getPresumedPosition()[0];
+        int newPosY = ghosts[i].getPresumedPosition()[1];
         ghosts[i].liftedObject  = maze[newPosX][newPosY];
         maze[newPosX][newPosY] = GHOST;
 
@@ -135,6 +131,7 @@ void Maze::respawnSameLevel(){
     movePacman(pacman.getCurrentPosition(),pacman.initPosition);
     pacman.setCurrentPosition(pacman.initPosition[0], pacman.initPosition[1]);
     pacman.setCurrentVelocity(0, 0);
+    
     for (int i=0; i<ghosts.size(); i++){
         respawnGhost(ghosts[i]);
     }

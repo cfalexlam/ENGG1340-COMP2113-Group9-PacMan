@@ -12,47 +12,23 @@ Ghost::Ghost(Maze *m, int row, int col){
   this->currentPosition[1] = col;
 }
 
-void Ghost::setCurrentPosition(int row, int col)
-{
-  this->currentPosition[0] = row;
-  this->currentPosition[1] = col;
-}
-
-void Ghost::setCurrentVelocity(int row, int col){
-  this->currentVelocity[0] = row;
-  this->currentVelocity[1] = col;
-}
-
-int* Ghost::getCurrentVelocity()
-{
-  return this->currentVelocity;
-}
-
-int* Ghost::getCurrentPosition()
-{
-  return this->currentPosition;
-}
-
 void Ghost::setRandomVelocity(){
   /* Generate random directions of movement */
   std::vector<int> validDirections;
   int numberOfValidDirections = 0;
-  if (!m->isWall(currentPosition[0]+1, currentPosition[1])){
+  if (!m->isWall(currentPosition[0]+1, currentPosition[1]))
     validDirections.push_back(0);
-  }
-  if (!m->isWall(currentPosition[0]-1, currentPosition[1])){
+  if (!m->isWall(currentPosition[0]-1, currentPosition[1]))
     validDirections.push_back(1);
-  }
-  if (!m->isWall(currentPosition[0], currentPosition[1]+1)){
+  if (!m->isWall(currentPosition[0], currentPosition[1]+1))
     validDirections.push_back(2);
-  }
-  if (!m->isWall(currentPosition[0], currentPosition[1]-1)){
+  if (!m->isWall(currentPosition[0], currentPosition[1]-1))
     validDirections.push_back(3);
-  }
 
   int randomDirection = validDirections[rand() % validDirections.size()];
   
-  switch (randomDirection){
+  switch (randomDirection)
+  {
     case 0:
       currentVelocity[0] = 1;
       currentVelocity[1] = 0;
@@ -71,7 +47,38 @@ void Ghost::setRandomVelocity(){
       break;
   }
 }
-void Ghost::respawn(){
+
+void Ghost::setCurrentPosition(int row, int col)
+{
+  this->currentPosition[0] = row;
+  this->currentPosition[1] = col;
+}
+
+void Ghost::setCurrentVelocity(int row, int col)
+{
+  this->currentVelocity[0] = row;
+  this->currentVelocity[1] = col;
+}
+
+int* Ghost::getCurrentVelocity()
+{
+  return this->currentVelocity;
+}
+
+int* Ghost::getCurrentPosition()
+{
+  return this->currentPosition;
+}
+
+int* Ghost::getPresumedPosition()
+{
+	this->presumedPosition[0] = this->currentPosition[0] + this->currentVelocity[0];
+	this->presumedPosition[1] = this->currentPosition[1] + this->currentVelocity[1];
+	return this->presumedPosition;
+}
+
+void Ghost::respawn()
+{
   currentPosition[0] = initPosition[0];
   currentPosition[1] = initPosition[1];
 }

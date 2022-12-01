@@ -22,7 +22,7 @@ int main(){
         filename = takeCmdInput("Choose a map to play");
 
         MainGame game(playername, filename);
-        while (game.mainLoop());
+        game.mainLoop();
     }
     if (command=="r") //show rule
       {}

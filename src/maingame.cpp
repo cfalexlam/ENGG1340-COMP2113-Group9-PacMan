@@ -55,17 +55,21 @@ bool MainGame::mainLoop() {
     // Main game logic
     while (1) {
         clear();
+        printw("Score: %d\n",player.getScore());
+        printw("Lives: %d\n",player.getLives());
+        printw("Strong: %d\n",maze.pacman.strong);
         maze.printMaze();
         // Get user input from keyboard
-        printw("%d %d \n",maze.pacman.getCurrentPosition()[0],maze.pacman.getCurrentPosition()[1]);
         input = getch();
-        if (input == int('q')) {
+        if (input == int('q')) 
+        {
             screen.keyboardModeClose();
             return false; // stop the game
         }
 
         // Set presumed velocities of pacman, which correspond to user input
-        switch (input) {
+        switch (input) 
+        {
             case KEY_UP:
             	maze.pacman.setPresumedVelocity(-1,0);
                 break;
@@ -81,7 +85,8 @@ bool MainGame::mainLoop() {
         }
         
         // Only update the actual velocities of pacman if the instruction is valid, i.e. the pacman is not bumping into a wall
-        if (! maze.isWall(maze.pacman.getCurrentPosition()[0] + maze.pacman.getPresumedVelocity()[0], maze.pacman.getCurrentPosition()[1]+maze.pacman.getPresumedVelocity()[1])) {
+        if (! maze.isWall(maze.pacman.getCurrentPosition()[0] + maze.pacman.getPresumedVelocity()[0], maze.pacman.getCurrentPosition()[1]+maze.pacman.getPresumedVelocity()[1])) 
+        {
             maze.pacman.setCurrentVelocity(maze.pacman.getPresumedVelocity()[0] , maze.pacman.getPresumedVelocity()[1]);
         }
         if (maze.isWall(maze.pacman.getCurrentPosition()[0] + maze.pacman.getCurrentVelocity()[0], maze.pacman.getCurrentPosition()[1]+maze.pacman.getCurrentVelocity()[1])) {
@@ -102,9 +107,11 @@ bool MainGame::mainLoop() {
 
         // Check if pacman is bumping into any of the ghosts
         for (int i = 0; i < maze.ghosts.size(); i++) {
-            if (collision(maze.ghosts[i], maze.pacman) and maze.pacman.strong == 0) {
+            if (collision(maze.ghosts[i], maze.pacman) and maze.pacman.strong == 0) 
+            {
                 player.loseLife();
-                if (player.getLives() == 0) {
+                if (player.getLives() == 0) 
+                {
                     // Ends the game when player loses all his lives
                     screen.printLoseScreen(player);
                     screen.keyboardModeWB();
@@ -123,13 +130,11 @@ bool MainGame::mainLoop() {
                     }
                 }
                 maze.respawnSameLevel(); // restore the starting positions of ghosts and pacman, while keeping the dots at their current places
-                
-                break;
+                goto DELAY;
             }
-            if (collision(maze.ghosts[i], maze.pacman) && maze.pacman.strong > 0) {
+            if (collision(maze.ghosts[i], maze.pacman) and maze.pacman.strong > 0)
                 maze.respawnGhost(maze.ghosts[i]);
-                continue;
-            }
+
         }
 
         // Update score when a food is eaten
@@ -140,11 +145,8 @@ bool MainGame::mainLoop() {
         for (int i=0;i<maze.pellets.size();i++)
         	if (maze.pellets[i].getPosition()[0] == maze.pacman.getPresumedPosition()[0],
         	    maze.pellets[i].getPosition()[1] == maze.pacman.getPresumedPosition()[1])
-                {
-                    maze.pacman.strong = 100;
-                    break;
+             		maze.pacman.strong = 100;
 
-                }
             		
 
         // Update the position representation of Pacman and Ghost in the maze
@@ -162,7 +164,6 @@ bool MainGame::mainLoop() {
             switch (input) {
             case 'y':
                 screen.keyboardModeClose();
-                //maze = Maze(fn);
                 return true;
                 break;
             case 'n':
@@ -176,7 +177,7 @@ bool MainGame::mainLoop() {
         maze.pacman.setCurrentPosition(maze.pacman.getPresumedPosition()[0],maze.pacman.getPresumedPosition()[1]);
         
         // 0.2 second of delay for each looo
-        usleep(0.2 * 1000000);
+        DELAY:usleep(0.2 * 1000000);
 
         // Pacman remains in "strong" state for 4 seconds (20 loops)
         maze.pacman.strong = max(0, maze.pacman.strong - 1);
@@ -186,6 +187,9 @@ bool MainGame::mainLoop() {
 
 }
 bool collision(Ghost& ghost, Pacman& pacman) {
-    return (ghost.getCurrentPosition()[0] + ghost.getCurrentVelocity()[0] == pacman.getPresumedPosition()[0] && ghost.getCurrentPosition()[1] + ghost.getCurrentVelocity()[1] == pacman.getPresumedPosition()[1]);
-    //|| (ghost.getPosition()[0] + ghost.getVelocity()[0] == pacman.getPosition()[0] && ghost.getPosition()[1] + ghost.getVelocity()[1] == pacman.getPosition()[1])
-}   // second expression is redundant, with extra case included (e.g. a ghost and a pacman moving in the same direction, while being adjacent to each other)
+    return ( (ghost.getPresumedPosition()[0] == pacman.getPresumedPosition()[0] && ghost.getPresumedPosition()[1] == pacman.getPresumedPosition()[1])
+    	     || ( (ghost.getPresumedPosition()[0] == pacman.getCurrentPosition()[0] && ghost.getPresumedPosition()[1] == pacman.getCurrentPosition()[1])
+    	   	     && ( (pacman.getPresumedPosition()[0] == ghost.getCurrentPosition()[0] && pacman.getPresumedPosition()[1] == ghost.getCurrentPosition()[1])
+    	   	     )));
+    
+}   

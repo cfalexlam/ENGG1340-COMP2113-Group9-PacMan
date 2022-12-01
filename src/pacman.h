@@ -13,10 +13,9 @@ class Pacman{
     int* getPresumedPosition();
 
     // Invulnerable state counter
-    int strong;
+    int strong=0;
     int initPosition[2];
   private:
-    void setPresumedPosition();
     int currentPosition[2];
     int currentVelocity[2];
     int presumedPosition[2];
