@@ -17,7 +17,7 @@ int main() {
     {
         string playername;
         playername = takeCmdInput("Input your name");
-      
+        
         printFile("../map/maplist.txt");
         string filename;
         filename = takeCmdInput("Choose a map to play");

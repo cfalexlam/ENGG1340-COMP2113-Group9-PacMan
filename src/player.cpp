@@ -11,7 +11,7 @@ Player::Player(std::string plname){
     this->playername = playername;
 }
 std::string Player::getName(){
-	return this->playername;
+    return this->playername;
 }
 int Player::getScore(){
     return scoreSum;
