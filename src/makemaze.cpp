@@ -92,7 +92,6 @@ int main(){
 
 
 void savemap(int l,int w, vector<vector<char> > map) {
-    // check position of player
     ofstream fout;
     fout.open("../map/playermap.txt");
 
@@ -109,37 +108,61 @@ void savemap(int l,int w, vector<vector<char> > map) {
         }
     }
 
-    fout.close();
 
-    countNo(map, 'G');
-    countNo(map, 'O');
-    
-    for ()
-
-}
-
-void countNo(vector <vector <char> > map, char find) {
-    ofstream fout;
-    fout.open("../map/playermap.txt", ios::app);
-
-    int NoTarget = 0;
-    vector <vector <int> > targets;
+    int NoGhost = 0;
+    vector <vector <int> > ghosts;
     for (int i = 0; i < map.size(); i++) {
         for (int j=0; j<map[i].size(); j++) {
-            if (map[i][j] == find) {
-                vector <int> target;
-                NoTarget += 1;
+            if (map[i][j] == 'G') {
+                vector <int> ghost;
+                NoGhost += 1;
 
-                target.push_back(i);
-                target.push_back(j);
+                ghost.push_back(i);
+                ghost.push_back(j);
 
-                targets.push_back(target);
+                ghosts.push_back(ghost);
             }
         }
     }
-    fout << NoTarget << endl;
+    fout << NoGhost << endl;
 
-    for (int  i= 0; i < targets.size(); i++) {
-        fout << targets[i][0] << ' ' << targets[i][1] << endl;
+    for (int  i= 0; i < ghosts.size(); i++) {
+        fout << ghosts[i][0] << ' ' << ghosts[i][1] << endl;
     }
+
+
+    int NoPellet = 0;
+    vector <vector <int> > pellets;
+    for (int i = 0; i < map.size(); i++) {
+        for (int j=0; j<map[i].size(); j++) {
+            if (map[i][j] == 'O') {
+                vector <int> pellet;
+                NoPellet += 1;
+
+                pellet.push_back(i);
+                pellet.push_back(j);
+
+                pellets.push_back(pellet);
+            }
+        }
+    }
+    fout << NoPellet << endl;
+
+    for (int  i= 0; i < pellets.size(); i++) {
+        fout << pellets[i][0] << ' ' << pellets[i][1] << endl;
+    }
+
+    for (int i=0; i<l; i++) {
+        for (int j=0; j<w; j++) {
+            if (map[i][j] == 'X' || map[i][j] == 'O' || map[i][j] == 'G' || map[i][j] == '_') 
+                fout << '.';
+            else
+                fout << map[i][j];
+        }
+        fout << endl;
+    }
+
+    fout.close();
 }
+
+
