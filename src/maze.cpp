@@ -58,7 +58,7 @@ Maze::Maze(std::string filename) {
         getline(fin, line);
         linein.str(line);
         linein >> row >> col;
-	Pellet pellet(row, col);// Store positions in power pellets
+				Pellet pellet(row, col);// Store positions in power pellets
         pellets.push_back(pellet);
         linein.clear();
     }
@@ -112,15 +112,17 @@ void Maze::moveGhost(){
         int newPosX = ghosts[i].getPresumedPosition()[0];
         int newPosY = ghosts[i].getPresumedPosition()[1];
         ghosts[i].liftedObject  = maze[newPosX][newPosY];
-        maze[newPosX][newPosY] = GHOST;
 
         ghosts[i].setCurrentPosition(newPosX,newPosY);
     }
+    for (int i=0; i<ghosts.size(); i++)
+        maze[ghosts[i].getCurrentPosition()[0]][ghosts[i].getCurrentPosition()[1]] = GHOST;
 }
 
 void Maze::respawnGhost(Ghost ghost){
-    maze[ghost.getCurrentPosition()[0]][ghost.getCurrentPosition()[1]] = ghost.liftedObject;
-    ghost.liftedObject = maze[ghost.initPosition[0]][ghost.initPosition[1]];
+		if (! maze[ghost.getCurrentPosition()[0]][ghost.getCurrentPosition()[1]] == GHOST)
+    	maze[ghost.getCurrentPosition()[0]][ghost.getCurrentPosition()[1]] = ghost.liftedObject;
+    ghost.liftedObject = ' ';
     maze[ghost.initPosition[0]][ghost.initPosition[1]] = GHOST;
     
     ghost.setCurrentPosition(ghost.initPosition[0],ghost.initPosition[1]);
