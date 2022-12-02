@@ -121,8 +121,8 @@ void Maze::moveGhost(){
 }
 
 void Maze::respawnGhost(Ghost ghost){
-    if (! maze[ghost.getCurrentPosition()[0]][ghost.getCurrentPosition()[1]] == GHOST)
-        maze[ghost.getCurrentPosition()[0]][ghost.getCurrentPosition()[1]] = ghost.liftedObject;
+
+    maze[ghost.getCurrentPosition()[0]][ghost.getCurrentPosition()[1]] = ghost.liftedObject;
     ghost.liftedObject = ' ';
     maze[ghost.initPosition[0]][ghost.initPosition[1]] = GHOST;
     
@@ -134,10 +134,17 @@ void Maze::respawnSameLevel(){
     movePacman(pacman.getCurrentPosition(),pacman.initPosition);
     pacman.setCurrentPosition(pacman.initPosition[0], pacman.initPosition[1]);
     pacman.setCurrentVelocity(0, 0);
-    
+    pacman.setPresumedVelocity(0, 0);
+
     for (int i=0; i<ghosts.size(); i++){
-        respawnGhost(ghosts[i]);
+        maze[ghosts[i].getCurrentPosition()[0]][ghosts[i].getCurrentPosition()[1]] = ghosts[i].liftedObject;
     }
+    for (int i=0; i<ghosts.size(); i++){
+        ghosts[i].liftedObject  = ' ';
+        ghosts[i].setCurrentPosition(ghosts[i].initPosition[0],ghosts[i].initPosition[1]);
+    }
+    for (int i=0; i<ghosts.size(); i++)
+        maze[ghosts[i].initPosition[0]][ghosts[i].initPosition[1]] = GHOST;
 }
 
 bool Maze::isWall(int row, int col) {
