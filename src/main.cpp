@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-//#include "makemaze.h"
+#include "makemaze.h"
 #include "maingame.h"
 using namespace std;
 
@@ -25,15 +25,15 @@ int main() {
         MainGame game(playername, filename);
         game.mainLoop();
     }
-    if (command=="r") // show rule form file
+    else if (command=="r") // show rule form file
     {
         printFile("../templates/gamerule.txt");
         takeCmdInput("Press any key to quit");
     }
 
-    //if (command == "m") {
-    //   makemaze();
-    //}
+    else if (command == "m") {
+       makemaze();
+    }
       
   }
     while (command!="q");

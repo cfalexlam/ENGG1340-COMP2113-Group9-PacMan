@@ -89,7 +89,6 @@ Maze::Maze(std::string filename) {
 }
 
 void Maze::printMaze() {
-    std::string output = "";
     for (int row = 0; row < maze.size(); row++) {
         for (int col = 0; col < maze[0].size(); col++){
             printw("%c ", maze[row][col]);

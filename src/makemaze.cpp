@@ -47,7 +47,6 @@ int makemaze(){
     nodelay(stdscr,false);
     do
     {
-        
         clear();
         printw("Rules:\n1. Use up down left right to control the place to insert character.\n");
         printw("2. Type G, X, O and = to insert ghosst, player, pellets and walls respectively.\n");
@@ -90,15 +89,52 @@ int makemaze(){
         }
 
     }
-    while (input != 'q');
+    while (input != 'q' or !mapIsValid(map) );
     echo();
     endwin();
-    savemap(length, width, map);
+    //savemap(length, width, map);
     clear();
     return 1;
 }
+void fill(int row,int col,vector<vector<char>> mapcopy)
+{
 
-
+    if (row<0 || row>=mapcopy.size() || col < 0 || col>= mapcopy[0].size())
+        return;
+    if (mapcopy[row][col]=='=' or mapcopy[row][col]=='*')
+        return;
+    mapcopy[row][col] = '*';
+    fill(row+1,col,mapcopy);
+    fill(row-1,col,mapcopy);
+    fill(row,col+1,mapcopy);
+    fill(row,col-1,mapcopy);
+    clear();
+}
+bool mapIsValid(vector<vector<char>> map)
+{
+    printw("test");
+    getch();
+    vector<vector<char>> mapcopy;
+    for (int row = 0 ; row < map.size() ; row++)
+        for (int col = 0 ; col < map[0].size() ; col++)
+            if (map[row][col]!='=')
+            {
+                mapcopy = map;
+                fill(row,col,mapcopy);
+                printw("end");
+                getch();
+                goto BREAK;
+            }
+  
+    BREAK:
+    for (int row = 0 ; row < mapcopy.size() ; row++)
+        for (int col = 0 ; col < mapcopy[0].size() ; col++)
+            if (mapcopy[row][col]!='=' and mapcopy[row][col]!='*' )
+            {
+                return false;
+            }
+    return true;
+}
 void savemap(int l,int w, vector<vector<char> > map) {
     ofstream fout;
     fout.open("../map/playermap.txt");

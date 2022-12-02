@@ -175,7 +175,7 @@ bool MainGame::mainLoop() {
         }
 
         // 0.2 second of delay for each looo
-        DELAY:usleep(DELAYSECONDS * 1000000);
+        DELAY:usleep(0.2* 1000000);
 
         // Pacman remains in "strong" state for 4 seconds (20 loops)
         maze.pacman.strong = max(0, maze.pacman.strong - 1);
