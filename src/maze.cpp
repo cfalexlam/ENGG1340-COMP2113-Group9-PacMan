@@ -125,7 +125,6 @@ void Maze::respawnGhost(Ghost ghost){
     maze[ghost.getCurrentPosition()[0]][ghost.getCurrentPosition()[1]] = ghost.liftedObject;
     ghost.liftedObject = ' ';
     maze[ghost.initPosition[0]][ghost.initPosition[1]] = GHOST;
-    
     ghost.setCurrentPosition(ghost.initPosition[0],ghost.initPosition[1]);
     ghost.setCurrentVelocity(0, 0);
 }
