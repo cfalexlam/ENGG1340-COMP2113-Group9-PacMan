@@ -132,7 +132,7 @@ bool MainGame::mainLoop() {
                 goto DELAY;
             }
             if (collision(maze.ghosts[i], maze.pacman) and maze.pacman.strong > 0)
-                maze.respawnGhost(maze.ghosts[i]);
+                maze.respawnGhost(&maze.ghosts[i]);
 
         }
 

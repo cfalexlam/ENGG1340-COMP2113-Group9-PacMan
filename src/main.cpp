@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include "makemaze.h"
+//#include "makemaze.h"
 #include "maingame.h"
 using namespace std;
 
@@ -31,9 +31,9 @@ int main() {
         takeCmdInput("Press any key to quit");
     }
 
-    if (command == "m") {
-        makemaze();
-    }
+    //if (command == "m") {
+    //   makemaze();
+    //}
       
   }
     while (command!="q");
