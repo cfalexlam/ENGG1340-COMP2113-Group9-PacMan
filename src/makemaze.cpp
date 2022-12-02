@@ -74,13 +74,13 @@ int makemaze(){
             case int('='):
                 map[pointerRow][pointerCol] = '=';
                 break;
-            case int('G'):
+            case int('G'):case int('g'):
                 map[pointerRow][pointerCol] = 'G';
                 break;
             case int('X'): case int('x'):
                 map[pointerRow][pointerCol] = 'X';
                 break;
-            case int('O'):
+            case int('O'):case int('o'):
                 map[pointerRow][pointerCol] = 'O';
                 break;
             case KEY_BACKSPACE:

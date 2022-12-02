@@ -48,8 +48,6 @@ Maze::Maze(std::string filename) {
         linein.clear();
     }
 
-
-
     getline(fin, line); // Read in power pellet positions
 
     for (int i = 0, j = stoi(line); i < j; i++) {
@@ -91,9 +89,11 @@ Maze::Maze(std::string filename) {
 }
 
 void Maze::printMaze() {
+    std::string output = "";
     for (int row = 0; row < maze.size(); row++) {
-        for (int col = 0; col < maze[0].size(); col++)
+        for (int col = 0; col < maze[0].size(); col++){
             printw("%c ", maze[row][col]);
+        }
         printw("\n");
     }
 }
