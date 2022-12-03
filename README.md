@@ -46,6 +46,6 @@ Pac-Man, originally called Puck Man in Japan, is a legendary and classic maze ac
 2. Complie the game by the command "make main"
 3. Execute the game by the command "./main"
 4. Clean the object codes by the command "make clean"
-5. 
+
 ## Demonstration of gameplay
 
