@@ -39,8 +39,7 @@ class Maze{
         void movePacman(int* currentPosition, int* presumedPosition);
         void moveGhost();
 
-        // Return the number of remaining food
-        int foodLeft();
+
         
         // Restart the game while keeping the dots; respawn the ghosts and pacman at their spawnpoints
         void respawnSameLevel();

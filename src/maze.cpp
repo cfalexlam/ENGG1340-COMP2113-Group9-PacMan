@@ -125,7 +125,7 @@ void Maze::respawnGhost(Ghost &ghost)
     ghost.liftedObject = ' ';
     maze[ghost.initPosition[0]][ghost.initPosition[1]] = GHOST;
     ghost.setCurrentPosition(ghost.initPosition[0], ghost.initPosition[1]);
-    ghost.setCurrentVelocity(0, 0);
+    ghost.setCurrentVelocity(0,0);
 }
 
 void Maze::respawnSameLevel()
@@ -160,9 +160,4 @@ bool Maze::isGhost(int row, int col)
 bool Maze::isFood(int row, int col) 
 {
     return maze[row][col] == FOOD;
-}
-
-int Maze::foodLeft() 
-{
-    return food;
 }

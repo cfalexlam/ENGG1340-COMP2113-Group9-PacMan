@@ -18,7 +18,7 @@ void makemaze(){
     cout << "Length: ";
     cin >> row;
 
-    cout << "width: ";
+    cout << "Width: ";
     cin >> col;
 
     vector< vector<char> > maze;
@@ -105,7 +105,8 @@ void makemaze(){
             case KEY_BACKSPACE:
                 maze[pointerRow][pointerCol] = '_';
                 break;
-            case 's': case 'S':
+
+            case 's': case 'S':                 //save maze
                 if (GetSymbolNumber(maze,'G')==0)
                 {
                     printw("Require at least 1 ghost ");

@@ -15,13 +15,11 @@ int main() {
     command = takeCmdInput("Input your choice");
     if (command=="p") // start game
     {
-        string playername;
-        playername = takeCmdInput("Input your name");
         system("ls ../map/ > ../map/maplist.txt");
         printFile("../map/maplist.txt");
         string filename;
         filename = takeCmdInput("Choose a map to play");
-        MainGame game(playername, filename);
+        MainGame game(filename);
         game.mainLoop();
     }
     else if (command=="r") // show rule form file

@@ -33,7 +33,6 @@ void ScreenRenderer::keyboardModePrint(std::string str) {
 
 void ScreenRenderer::printLoseScreen(Player pl) {
     printw("YOU LOSE!\n");
-    printw("You die at level %d \n", pl.getLevel());
     printw("Your total score is %d \n", pl.getScore());
 }
 

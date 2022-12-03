@@ -16,9 +16,9 @@ const double DELAYSECONDS = 0.2;
 
 bool collision(Ghost& ghost, Pacman& pacman);
 
-MainGame::MainGame(string playername, string filename)
+MainGame::MainGame(string filename)
 {
-    this->playername = playername;
+
     this->filename = filename;
 }
 
@@ -33,13 +33,13 @@ bool MainGame::mainLoop()
 
     // Initialize screen renderer
     ScreenRenderer screen;
-    Player player(playername);
+    Player player;
     
     Maze maze("../map/"+filename);
     
     screen.keyboardModeOpen();
     screen.keyboardModeWB();
-    screen.keyboardModePrint("Hi " + player.getName() + "! Are you ready? (Press any key to continue)");
+    screen.keyboardModePrint("Are you ready? (Press any key to continue)");
     getch();
     screen.keyboardModeNB();
 
@@ -50,6 +50,7 @@ bool MainGame::mainLoop()
         printw("Score: %d\n",player.getScore());
         printw("Lives: %d\n",player.getLives());
         printw("Strong: %d\n",maze.pacman.strong);
+        printw("Total: %d\n",maze.food);
         maze.printMaze();
         // Get user input from keyboard
         input = getch();
@@ -89,7 +90,6 @@ bool MainGame::mainLoop()
         
         // Check if pacman is bumping into any of the ghosts
         for (int i = 0; i < maze.ghosts.size(); i++) 
-        {
             if (collision(maze.ghosts[i], maze.pacman) and maze.pacman.strong == 0) 
             {
                 player.loseLife();
@@ -100,16 +100,13 @@ bool MainGame::mainLoop()
                     screen.keyboardModeWB();
                     int input;
                     screen.keyboardModePrint("Retry?(y/n)");
-                    while(true)
+                    input = getch();
+                    switch (input) 
                     {
-                        input = getch();
-                        switch (input) 
-                        {
-                            case 'y': case 'Y':
-                                goto RETRY;
-                            case 'n': case 'N':
-                                goto QUIT;
-                        }
+                        case 'y': case 'Y':
+                            goto RETRY;
+                        case 'n': case 'N':
+                            goto QUIT;
                     }
                 }
                 maze.respawnSameLevel(); // restore the starting positions of ghosts and pacman, while keeping the dots at their current places
@@ -117,7 +114,6 @@ bool MainGame::mainLoop()
             }
             else if (collision(maze.ghosts[i], maze.pacman) and maze.pacman.strong > 0)
                 maze.respawnGhost(maze.ghosts[i]);
-        }
 
         // Update score when a food is eaten
         if (maze.isFood(maze.pacman.getPresumedPosition()[0],maze.pacman.getPresumedPosition()[1])) 
@@ -127,7 +123,10 @@ bool MainGame::mainLoop()
         for (int i=0;i<maze.pellets.size();i++)
         	if (maze.pellets[i].getPosition()[0] == maze.pacman.getPresumedPosition()[0] &&
         	    maze.pellets[i].getPosition()[1] == maze.pacman.getPresumedPosition()[1])
-             		maze.pacman.strong = 50;
+                {
+                    maze.pacman.strong = 50;
+                }
+             		
 
         // Update the position representation of Pacman and Ghost in the maze
         maze.movePacman(maze.pacman.getCurrentPosition(),maze.pacman.getPresumedPosition());
@@ -142,7 +141,7 @@ bool MainGame::mainLoop()
             screen.printWinScreen(player);
             screen.keyboardModeWB();
             int input;
-            screen.keyboardModePrint("Press any key to back to menu");
+            screen.keyboardModePrint("Press any key back to menu");
             getch();
             goto QUIT;
         }
