@@ -3,9 +3,10 @@
 #include <vector>
 using namespace std;
 
-void savemap(int l,int w, vector<vector<char> > map);
-void printmap(int l,int w, vector< vector<char> > map,int pointerRow, int pointerCol);
-int makemaze();
-void fill(int row,int col,vector<vector<char>> map);
-bool mapIsValid(vector<vector<char>> map);
+void makemaze();
+void savemap(vector<vector<char> > maze,string filename);
+void printmap(vector< vector<char> > maze,int pointerRow, int pointerCol);
+void fill(int row,int col,vector<vector<char>> &maze);
+bool mapIsConnected(vector<vector<char>> maze);
+int GetSymbolNumber(vector<vector<char>> maze,char symbol);
 #endif
