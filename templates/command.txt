@@ -1,5 +1,6 @@
-Please enter a command (p/r/q)
+Please enter a command (p/r/m/q)
 p: start a new game
 r: read game rules
 m: make your own map
 q: exit game
+
