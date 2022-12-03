@@ -1,4 +1,4 @@
-7 17    //spawn point of pacman
+7 16    //spawn point of pacman
 4       //number of ghost
 7 8    //spawn point of ghost1
 8 8    //spawn point of ghost2

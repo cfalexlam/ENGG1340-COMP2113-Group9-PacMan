@@ -7,4 +7,5 @@
 3. Eating a pellet allows you to catch the ghosts back 
    until your strength becomes 0
 4. You lose the game if you lose all 3 lives
+5. You may quit the current game by pressing 'q'
 ------------------------------------------------------------

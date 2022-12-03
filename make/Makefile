@@ -1,4 +1,3 @@
-# usage: go to the make directory
 # compile: make game
 # clean: make clean
 

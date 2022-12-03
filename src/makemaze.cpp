@@ -42,8 +42,9 @@ void makemaze(){
         clear();
         printw("Rules:\n1. Use up down left right to control the place to insert character.\n");
         printw("2. Type G, X, O and = to insert ghosst, player, pellets and walls respectively.\n");
-        printw("3. Press q to quit ");
-        printw("4. Press s to save and quit");
+        printw("3. Press backspace to delete the character ");
+        printw("4. Press q to quit ");
+        printw("5. Press s to save and quit");
         printw("\n");
         printmap(maze,pointerRow,pointerCol);
         input = getch();
