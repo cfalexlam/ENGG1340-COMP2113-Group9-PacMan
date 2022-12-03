@@ -10,30 +10,27 @@ void printFile(const string& fileName);
 
 int main() {
     string command;
-  do {
-    printStartMenu();
-    command = takeCmdInput("Input your choice");
-    if (command=="p") // start game
-    {
-        system("ls ../map/ > ../map/maplist.txt");
-        printFile("../map/maplist.txt");
-        string filename;
-        filename = takeCmdInput("Choose a map to play");
-        MainGame game(filename);
-        game.mainLoop();
-    }
-    else if (command=="r") // show rule form file
-    {
-        printFile("../templates/gamerule.txt");
-        takeCmdInput("Press any key to quit");
-    }
-
-    else if (command == "m") {
-       makemaze();
-    }
-      
-  }
-    while (command!="q");
+    do {
+        printStartMenu();
+        command = takeCmdInput("Input your choice");
+        if (command=="p") // start game
+        {
+            system("ls ../map/ > ../map/maplist.txt");
+            printFile("../map/maplist.txt");
+            string filename;
+            filename = takeCmdInput("Choose a map to play");
+            MainGame game(filename);
+            while(game.mainLoop());
+        }
+        else if (command=="r") // show rule form file
+        {
+            printFile("../templates/gamerule.txt");
+            takeCmdInput("Press any key to quit");
+        }
+        else if (command == "m") {
+            makemaze();
+        } 
+    }while (command!="q");
     return 1;
 }
 

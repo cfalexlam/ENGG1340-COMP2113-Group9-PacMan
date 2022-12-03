@@ -34,11 +34,11 @@ bool MainGame::mainLoop()
     // Initialize screen renderer
     ScreenRenderer screen;
     Player player;
-    
     Maze maze("../map/"+filename);
     
     screen.keyboardModeOpen();
     screen.keyboardModeWB();
+    clear();
     screen.keyboardModePrint("Are you ready? (Press any key to continue)");
     getch();
     screen.keyboardModeNB();
@@ -100,14 +100,18 @@ bool MainGame::mainLoop()
                     screen.keyboardModeWB();
                     int input;
                     screen.keyboardModePrint("Retry?(y/n)");
-                    input = getch();
-                    switch (input) 
+                    while (true)
                     {
-                        case 'y': case 'Y':
-                            goto RETRY;
-                        case 'n': case 'N':
-                            goto QUIT;
+                        input = getch();
+                        switch (input) 
+                        {
+                            case 'y': case 'Y':
+                                goto RETRY;
+                            case 'n': case 'N':
+                                goto QUIT;
+                        }
                     }
+                    
                 }
                 maze.respawnSameLevel(); // restore the starting positions of ghosts and pacman, while keeping the dots at their current places
                 goto NEXTLOOP;
@@ -152,7 +156,7 @@ bool MainGame::mainLoop()
         maze.pacman.strong = max(0, maze.pacman.strong - 1);
     }
     RETRY:screen.keyboardModeClose();
-    return false;
+    return true;
 
     QUIT:screen.keyboardModeClose();
     return false;

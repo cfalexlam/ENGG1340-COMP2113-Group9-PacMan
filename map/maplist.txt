@@ -3,3 +3,4 @@ map2.txt
 map3.txt
 map4.txt
 maplist.txt
+sam.txt

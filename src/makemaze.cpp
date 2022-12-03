@@ -62,6 +62,8 @@ void makemaze(){
             case KEY_RIGHT:
                 pointerCol = min(col-2,pointerCol+1);
                 break;
+            case int('q'):case int('Q'):
+                goto QUIT;
             case int('='):
                 maze[pointerRow][pointerCol] = '=';
                 break;
@@ -140,7 +142,7 @@ void makemaze(){
     }
     
     SAVE:savemap(maze,filename);
-    screen.keyboardModeClose();
+    QUIT:screen.keyboardModeClose();
     return;
 }
         
