@@ -5,16 +5,17 @@ Group project for ENGG1340/COMP2113
 
 ## About the game
 
-Pac-Man, originally called Puck Man in Japan, is a legendary and classic maze action video game which was developed and released in the 1980s. To score, a player controls the "Pac-Man" to move inside an enclosed maze filled up with dots and "eats" all the dots. There are four ghosts patroling freely inside the maze, and that the players have to avoid them while eating up the dots. Eating the large flashing dots (also called the power pellet) turns the ghosts into a benign state, where additional scores are given when Pac-Man eats them up.
+Pacman, originally called Puck Man in Japan, is a legendary and classic maze action video game which was developed and released in the 1980s. To score, a player controls the "Pacman" to move inside an enclosed maze filled up with dots and "eats" all the dots. There are four ghosts patroling freely inside the maze, and that the players have to avoid them while eating up the dots. Eating the large flashing dots (also called the power pellet) turns the ghosts into a benign state, where additional scores are given when Pac-Man eats them up.
 
 ## Game rules
 
-1. The player starts the game by entering his name in the terminal.
-2. The action of the Pac-Man is controlled using WASD keys. Press W to move upward, A to move downward, S to move left and D to move right.
-3. Consuming a dot will grant the player 10 points, while consuming the power pellets, which are the large flashing dots, turns the ghosts blue for 10 seconds for Level 1 and make them edible for 200 points each. Extra points will be given (double the points of the most recently eaten ghost) if ghosts are eaten in succession.
-4. Bonus fruit may appear and counts for 50 points when eaten.
-5. The player is brought to the next level when all dots on the maze are eaten, where difficulty is raised: the ghosts move faster, and the power pellets' effect lasts shorter.
-6. The game has 10 levels, and each player has 3 bonus lives. One life is lost when the Pac-Man collides with any of the ghosts.
+1. The player starts a game by entering the player name and the file name of the map in the terminal.
+2. The player can choose pre-designed maps or self-made maps.
+3. When the game starts, the player can use arrow keys (↑↓←→) in the keyboard to control the Pacman.
+4. The player loses 1 life each time he/she is caught by the ghost.
+5. Eating the pellet boosts the pacman to 100 strength. The player can then eat the ghosts until the strength level drops to 0.
+6. The player wins the game by eating all the dots in the map.
+7. The player loses the game when he/she loses all 3 lifes.
 
 
 ## Features implemented
@@ -41,6 +42,10 @@ Pac-Man, originally called Puck Man in Japan, is a legendary and classic maze ac
 ## List of non-standard C/C++ libraries included
 
 ## Compilation and execution instruction
+1. Navigate to the make directory by the command "cd make"
+2. Complie the game by the command "make main"
+3. Execute the game by the command "./main"
+4. Clean the object codes by the command "make clean"
 
 ## Demonstration of gameplay
 
