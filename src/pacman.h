@@ -1,7 +1,6 @@
 #ifndef PACMAN_H
 #define PACMAN_H
 
-
 class Pacman{
 public:
     void setCurrentVelocity(int row, int col);

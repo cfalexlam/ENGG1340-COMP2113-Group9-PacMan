@@ -3,7 +3,8 @@
 #include <random>
 #include <vector>
 
-Ghost::Ghost(Maze *m, int row, int col) {
+Ghost::Ghost(Maze *m, int row, int col)
+{
 // Initialize member properties
     this->m = m;
     this->initPosition[0] = row;
@@ -12,7 +13,8 @@ Ghost::Ghost(Maze *m, int row, int col) {
     this->currentPosition[1] = col;
 }
 
-void Ghost::setRandomVelocity() {
+void Ghost::setRandomVelocity()
+{
     /* Generate random directions of movement */
     std::vector<int> validDirections;
     int numberOfValidDirections = 0;
@@ -30,21 +32,21 @@ void Ghost::setRandomVelocity() {
     switch (randomDirection)
     {
         case 0:
-        currentVelocity[0] = 1;
-        currentVelocity[1] = 0;
-        break;
+            currentVelocity[0] = 1;
+            currentVelocity[1] = 0;
+            break;
         case 1:
-        currentVelocity[0] = -1;
-        currentVelocity[1] = 0;
-        break;
+            currentVelocity[0] = -1;
+            currentVelocity[1] = 0;
+            break;
         case 2:
-        currentVelocity[0] = 0;
-        currentVelocity[1] = 1;
-        break;
+            currentVelocity[0] = 0;
+            currentVelocity[1] = 1;
+            break;
         case 3:
-        currentVelocity[0] = 0;
-        currentVelocity[1] = -1;
-        break;
+            currentVelocity[0] = 0;
+            currentVelocity[1] = -1;
+            break;
     }
 }
 
@@ -77,11 +79,7 @@ int* Ghost::getPresumedPosition()
     return this->presumedPosition;
 }
 
-void Ghost::respawn()
-{
-    currentPosition[0] = initPosition[0];
-    currentPosition[1] = initPosition[1];
-}
+
 
 
 

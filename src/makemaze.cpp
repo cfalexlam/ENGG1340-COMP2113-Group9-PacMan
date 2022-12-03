@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <fstream>
 #include "makemaze.h"
+#include "screenrenderer.h"
 using namespace std;
 
 void makemaze(){
@@ -33,10 +34,9 @@ void makemaze(){
     } 
 
     int input;
-    initscr();
-    noecho();
-    keypad(stdscr,true);
-    nodelay(stdscr,false);
+    ScreenRenderer screen;
+    screen.keyboardModeOpen();
+    screen.keyboardModeWB();
     while(1)
     {
         clear();
@@ -132,15 +132,14 @@ void makemaze(){
                 }
                 printw("Maze saved");
                 getch();
+                goto SAVE;
                 break;
 
         }
     }
     
     SAVE:savemap(maze,filename);
-    echo();
-    endwin();
-    clear();
+    screen.keyboardModeClose();
     return;
 }
         

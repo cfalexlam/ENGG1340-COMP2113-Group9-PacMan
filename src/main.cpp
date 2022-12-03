@@ -17,11 +17,10 @@ int main() {
     {
         string playername;
         playername = takeCmdInput("Input your name");
-        
+        system("ls ../map/ > ../map/maplist.txt");
         printFile("../map/maplist.txt");
         string filename;
         filename = takeCmdInput("Choose a map to play");
-
         MainGame game(playername, filename);
         game.mainLoop();
     }

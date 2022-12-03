@@ -15,7 +15,7 @@ public:
     void setRandomVelocity();
     
     // Reset position of ghost
-    void respawn();
+
     int initPosition[2];
     char liftedObject = ' ';
 

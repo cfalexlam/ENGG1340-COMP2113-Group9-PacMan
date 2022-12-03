@@ -52,14 +52,15 @@ Maze::Maze(std::string filename) {
 
         Pellet pellet(row, col);// Store positions in power pellets
         pellets.push_back(pellet);
-        
+
         linein.clear();
     }
 
 
     int i = 0; // Read in the map
-    while (getline(fin, line)) {
-        std::vector < char > temp;
+    while (getline(fin, line)) 
+    {
+        std::vector <char> temp;
         maze.push_back(temp);
         for (int j = 0; j < line.size(); j++) 
         {
@@ -75,16 +76,13 @@ Maze::Maze(std::string filename) {
     }
 
     for (int i = 0; i < pellets.size(); i++) 
-    {
         maze[pellets[i].getPosition()[0]][pellets[i].getPosition()[1]] = PELLETS;
-        food -= 1;
-    }
+    food -= pellets.size();
 
     for (int i = 0; i < ghosts.size(); i++) 
-    {
         maze[ghosts[i].getCurrentPosition()[0]][ghosts[i].getCurrentPosition()[1]] = GHOST;
-        food -= 1;
-    }
+    food -= ghosts.size();
+    
     maze[pacman.getCurrentPosition()[0]][pacman.getCurrentPosition()[1]] = PLAYER;
     food -= 1;
 }
@@ -92,9 +90,8 @@ Maze::Maze(std::string filename) {
 void Maze::printMaze()
 {
     for (int row = 0; row < maze.size(); row++) {
-        for (int col = 0; col < maze[0].size(); col++){
+        for (int col = 0; col < maze[0].size(); col++)
             printw("%c ", maze[row][col]);
-        }
         printw("\n");
     }
 }
@@ -141,7 +138,8 @@ void Maze::respawnSameLevel()
     for (int i=0; i<ghosts.size(); i++)
         maze[ghosts[i].getCurrentPosition()[0]][ghosts[i].getCurrentPosition()[1]] = ghosts[i].liftedObject;
 
-    for (int i=0; i<ghosts.size(); i++){
+    for (int i=0; i<ghosts.size(); i++)
+    {
         ghosts[i].liftedObject = ' ';
         ghosts[i].setCurrentPosition(ghosts[i].initPosition[0],ghosts[i].initPosition[1]);
     }

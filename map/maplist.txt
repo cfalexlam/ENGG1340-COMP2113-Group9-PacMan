@@ -1,6 +1,6 @@
-Map list:
+asd.txt
 map1.txt
 map2.txt
 map3.txt
 map4.txt
-playermap.txt (can be accessed after make)
+maplist.txt
