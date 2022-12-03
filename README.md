@@ -33,7 +33,7 @@ Pac-Man, originally called Puck Man in Japan, is a legendary and classic maze ac
 
 4.  File I/O (e.g. for loading or saving game status)
     * For file input, text files which contain the structure of the maze is loaded during initialization of the game. A player can also choose to load exisiting saves.
-    * For file output, when the player quits the game, his current game status will be output to a text file.
+    * For file output, when mode m is choosen, player are allowed to create a map on their own and save the map for later use. 
 
 5.  Program codes in multiple files
     * The program's code is partitioned into multiple .cpp and header files, according to classes.
