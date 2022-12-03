@@ -83,12 +83,24 @@ void makemaze(){
                 col+=1;
                 break;
             case 'j':case 'J':
-                delRow(maze);
-                row-=1;
+                if (row>3)
+                {
+                    if (pointerRow==row-2)
+                        pointerRow--;
+                    delRow(maze);
+                    row-=1;
+                    
+                }
                 break;
             case 'k':case 'K':
-                delCol(maze);
-                col-=1;
+                if (col>3)
+                {
+                    if (pointerCol==col-2)
+                        pointerCol--;
+                    delCol(maze);
+                    col-=1;
+                    
+                }
                 break;
             case KEY_BACKSPACE:
                 maze[pointerRow][pointerCol] = '_';

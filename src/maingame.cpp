@@ -1,34 +1,29 @@
 #include <cstdlib>
-
-#include <ncurses.h> // need to add "-lncurses" at last when compile
-
+#include <ncurses.h> 
 #include <iostream>
-
 #include <string>
-
 #include <unistd.h>
 
 #include "player.h"
-
 #include "maze.h"
-
 #include "screenrenderer.h"
-
 #include "ghost.h"
-
 #include "maingame.h"
+
 using namespace std;
 
-const int DELAYSECONDS = 0.2;
+const double DELAYSECONDS = 0.2;
 
 bool collision(Ghost& ghost, Pacman& pacman);
 
-MainGame::MainGame(string playername, string filename){
+MainGame::MainGame(string playername, string filename)
+{
     this->playername = playername;
     this->filename = filename;
 }
 
-bool MainGame::mainLoop() {
+bool MainGame::mainLoop() 
+{
     /*
         Runs the main game loop.
     */
@@ -59,11 +54,7 @@ bool MainGame::mainLoop() {
         // Get user input from keyboard
         input = getch();
         if (input == int('q')) 
-        {
-            screen.keyboardModeClose();
-            return false; // stop the game
-        }
-
+            goto QUIT;
         // Set presumed velocities of pacman, which correspond to user input
         switch (input) 
         {
@@ -83,25 +74,22 @@ bool MainGame::mainLoop() {
         
         // Only update the actual velocities of pacman if the instruction is valid, i.e. the pacman is not bumping into a wall
         if (! maze.isWall(maze.pacman.getCurrentPosition()[0] + maze.pacman.getPresumedVelocity()[0], maze.pacman.getCurrentPosition()[1]+maze.pacman.getPresumedVelocity()[1])) 
-        {
             maze.pacman.setCurrentVelocity(maze.pacman.getPresumedVelocity()[0] , maze.pacman.getPresumedVelocity()[1]);
-        }
+        
         if (maze.isWall(maze.pacman.getPresumedPosition()[0], maze.pacman.getPresumedPosition()[1])) 
-        {
             maze.pacman.setCurrentVelocity(0,0);
-        }
+        
         // Update velocities of ghosts if it moves towards a wall, or has a velocity of {0, 0}
 
-        for (int i=0; i<maze.ghosts.size(); i++){
-
+        for (int i=0; i<maze.ghosts.size(); i++)
             if ((maze.ghosts[i].getCurrentVelocity()[0] == 0 && maze.ghosts[i].getCurrentVelocity()[1] == 0) ||
                 (maze.isWall(maze.ghosts[i].getPresumedPosition()[0],maze.ghosts[i].getPresumedPosition()[1]))) {
                     maze.ghosts[i].setRandomVelocity();    
                 }
-        }
-
+        
         // Check if pacman is bumping into any of the ghosts
-        for (int i = 0; i < maze.ghosts.size(); i++) {
+        for (int i = 0; i < maze.ghosts.size(); i++) 
+        {
             if (collision(maze.ghosts[i], maze.pacman) and maze.pacman.strong == 0) 
             {
                 player.loseLife();
@@ -112,27 +100,23 @@ bool MainGame::mainLoop() {
                     screen.keyboardModeWB();
                     int input;
                     screen.keyboardModePrint("Retry?(y/n)");
-                    do{
+                    while(true)
+                    {
                         input = getch();
-                        switch (input) {
+                        switch (input) 
+                        {
                             case 'y': case 'Y':
-                                screen.keyboardModeClose();
-                                return true;
-                                break;
+                                goto RETRY;
                             case 'n': case 'N':
-                                screen.keyboardModeClose();
-                                return false;
-                                break;
+                                goto QUIT;
                         }
-
-                    }while (true);
+                    }
                 }
                 maze.respawnSameLevel(); // restore the starting positions of ghosts and pacman, while keeping the dots at their current places
-                goto DELAY;
+                goto NEXTLOOP;
             }
-            if (collision(maze.ghosts[i], maze.pacman) and maze.pacman.strong > 0)
+            else if (collision(maze.ghosts[i], maze.pacman) and maze.pacman.strong > 0)
                 maze.respawnGhost(maze.ghosts[i]);
-
         }
 
         // Update score when a food is eaten
@@ -148,6 +132,7 @@ bool MainGame::mainLoop() {
         // Update the position representation of Pacman and Ghost in the maze
         maze.movePacman(maze.pacman.getCurrentPosition(),maze.pacman.getPresumedPosition());
         maze.moveGhost();
+        
         // Update position stored in the pacman object
         maze.pacman.setCurrentPosition(maze.pacman.getPresumedPosition()[0],maze.pacman.getPresumedPosition()[1]);
 
@@ -157,32 +142,21 @@ bool MainGame::mainLoop() {
             screen.printWinScreen(player);
             screen.keyboardModeWB();
             int input;
-            screen.keyboardModePrint("Continue?(y/n)");
-            do{
-                input = getch();
-                switch (input) {
-                    case 'y': case 'Y':
-                        screen.keyboardModeClose();
-                        return true;
-                        break;
-                    case 'n': case 'N':
-                        screen.keyboardModeClose();
-                        return false;
-                        break;
-                }
-
-            }while (true);
+            screen.keyboardModePrint("Press any key to back to menu");
+            getch();
+            goto QUIT;
         }
 
         // 0.2 second of delay for each looo
-        DELAY:usleep(0.2* 1000000);
-
+        NEXTLOOP:usleep(DELAYSECONDS* 1000000);
         // Pacman remains in "strong" state for 4 seconds (20 loops)
         maze.pacman.strong = max(0, maze.pacman.strong - 1);
     }
-    screen.keyboardModeClose();
+    RETRY:screen.keyboardModeClose();
     return false;
 
+    QUIT:screen.keyboardModeClose();
+    return false;
 }
 bool collision(Ghost& ghost, Pacman& pacman) {
     return ( (ghost.getPresumedPosition()[0] == pacman.getPresumedPosition()[0] && ghost.getPresumedPosition()[1] == pacman.getPresumedPosition()[1])
