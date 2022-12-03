@@ -7,25 +7,25 @@
 using namespace std;
 
 void makemaze(){
-    int length,width;
+    int row,col;
     string filename;
     int pointerRow=1,pointerCol=1;
 
-    cout << "filename: " ;
+    cout << "Filename: ";
     cin >> filename;
 
     cout << "Length: ";
-    cin >> length;
+    cin >> row;
 
     cout << "width: ";
-    cin >> width;
+    cin >> col;
 
     vector< vector<char> > maze;
-    for (int i=0;i<length;i++)
+    for (int i=0;i<row;i++)
     {
         vector<char> temp;
-        for (int j=0;j<width;j++)
-            if (i==0 or i==length-1 or j==0 or j==width-1)
+        for (int j=0;j<col;j++)
+            if (i==0 or i==row-1 or j==0 or j==col-1)
                 temp.push_back('=');
             else
                 temp.push_back('_');
@@ -42,8 +42,8 @@ void makemaze(){
         clear();
         printw("Rules:\n1. Use up down left right to control the place to insert character.\n");
         printw("2. Type G, X, O and = to insert ghosst, player, pellets and walls respectively.\n");
-        printw("3. Do not insert more than 1 player.\n");
-        printw("4. Press q to save and quit.");
+        printw("3. Press q to quit ");
+        printw("4. Press s to save and quit");
         printw("\n");
         printmap(maze,pointerRow,pointerCol);
         input = getch();
@@ -54,13 +54,13 @@ void makemaze(){
                 pointerRow = max(1,pointerRow-1);
                 break;
             case KEY_DOWN:
-                pointerRow = min(length-2,pointerRow+1);
+                pointerRow = min(row-2,pointerRow+1);
                 break;
             case KEY_LEFT:
                 pointerCol = max(1,pointerCol-1);
                 break;
             case KEY_RIGHT:
-                pointerCol = min(width-2,pointerCol+1);
+                pointerCol = min(col-2,pointerCol+1);
                 break;
             case int('='):
                 maze[pointerRow][pointerCol] = '=';
@@ -74,17 +74,51 @@ void makemaze(){
             case int('O'):case int('o'):
                 maze[pointerRow][pointerCol] = 'O';
                 break;
+            case 'n':case 'N':
+                addRow(maze);
+                row+=1;
+                break;
+            case 'm':case 'M':
+                addCol(maze);
+                col+=1;
+                break;
+            case 'j':case 'J':
+                delRow(maze);
+                row-=1;
+                break;
+            case 'k':case 'K':
+                delCol(maze);
+                col-=1;
+                break;
             case KEY_BACKSPACE:
                 maze[pointerRow][pointerCol] = '_';
                 break;
             case 's': case 'S':
-                if (mapIsConnected(maze))
+                if (GetSymbolNumber(maze,'G')==0)
                 {
-                    printw("valid\n");
-                    goto SAVE;
+                    printw("Require at least 1 ghost ");
+                    getch();
+                    break;
                 }
-                else
-                    printw("no valid\n");
+                if (GetSymbolNumber(maze,'X')==0)
+                {
+                    printw("Require 1 pacman ");
+                    getch();
+                    break;
+                }
+                if (GetSymbolNumber(maze,'X')>1)
+                {
+                    printw("Require 1 pacman only ");
+                    getch();
+                    break;
+                }
+                if (!mazeIsConnected(maze))
+                {
+                    printw("The maze is not connected");
+                    getch();
+                    break;
+                }
+                printw("Maze saved");
                 getch();
                 break;
 
@@ -107,24 +141,24 @@ void savemap(vector<vector<char> > maze,string filename) {
         exit(1);     
     }
 
-    for (int i=0; i<maze.size(); i++)         //pacman
+    for (int i=0; i<maze.size(); i++)         //write in pacman
         for (int j=0; j<maze[i].size(); j++) 
             if (maze[i][j] == 'X') 
                 fout << i << ' ' << j << endl;  
 
-    fout << GetSymbolNumber(maze,'G') << endl; //ghost
+    fout << GetSymbolNumber(maze,'G') << endl; //write in ghost
     for (int i = 0; i < maze.size(); i++)    
         for (int j=0; j<maze[i].size(); j++) 
             if (maze[i][j] == 'G') 
                 fout << i << ' ' << j << endl;
 
-    fout << GetSymbolNumber(maze,'O') << endl; //pellet
+    fout << GetSymbolNumber(maze,'O') << endl; //write in pellet
     for (int i = 0; i < maze.size(); i++)  
         for (int j=0; j<maze[i].size(); j++) 
             if (maze[i][j] == 'O') 
                 fout << i << ' ' << j << endl;
 
-    for (int i=0; i<maze.size(); i++) {   //maze
+    for (int i=0; i<maze.size(); i++) {   //write in maze
         for (int j=0; j<maze[i].size(); j++) {
             if (maze[i][j] == 'X' || maze[i][j] == 'O' || maze[i][j] == 'G' || maze[i][j] == '_') 
                 fout << '.';
@@ -150,7 +184,7 @@ void fill(int row,int col,vector<vector<char>> &maze)
     fill(row,col-1,maze);
 }
 
-bool mapIsConnected(vector<vector<char>> maze)
+bool mazeIsConnected(vector<vector<char>> maze)
 {
     for (int row = 0 ; row < maze.size() ; row++)      //check maze is connected
         for (int col = 0 ; col < maze[0].size() ; col++)
@@ -190,4 +224,39 @@ int GetSymbolNumber(vector<vector<char>> maze,char symbol){
     return count;
 
 }
+void addRow(vector<vector<char> > &maze){
+    vector<char> temp = maze[0];
+    for (int i=0;i<maze[0].size();i++)
+        if (i==0 or i==maze[0].size()-1)
+            maze[maze.size()-1][i]='=';
+        else
+            maze[maze.size()-1][i]='_';
+    maze.push_back(temp);
+}
+
+void delRow(vector<vector<char> > &maze){
+    vector<char> temp = maze[0];
+    maze.pop_back();
+    maze.pop_back();
+    maze.push_back(temp);
+}
+
+void delCol(vector<vector<char> > &maze){
+    for (int i=0;i<maze.size();i++)
+    {
+        maze[i].pop_back();
+        maze[i].pop_back();
+        maze[i].push_back('=');
+    }
     
+}
+
+void addCol(vector<vector<char> > &maze){
+    for (int i=0;i<maze.size();i++)
+        if (i==0 or i==maze.size()-1)
+            maze[i][maze[i].size()-1]='=';
+        else
+            maze[i][maze[i].size()-1]='_';
+    for (int i=0;i<maze.size();i++)
+        maze[i].push_back('=');
+}
