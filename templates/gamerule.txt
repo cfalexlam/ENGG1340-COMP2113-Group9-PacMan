@@ -1,7 +1,10 @@
------------------------------------------------------
-                    Game rule
-1. Control the Pac-Man to consume all dots!
-2. Use WASD to change the direction of the Pac-Man.
-3. You lose 1 live if you are caught by the ghost.
-4. You have totally 3 lives.
------------------------------------------------------
+------------------------------------------------------------
+                        Game rule
+'=': wall  'X': Pacman  'Q': ghost  'O': pellet  '.': dot
+
+1. Use arrow keys to control the Pacman to eat all dots!
+2. You lose 1 life each time you are caught by the ghost
+3. Eating a pellet allows you to catch the ghosts back 
+   until your strength becomes 0
+4. You lose the game if you lose all 3 lives
+------------------------------------------------------------
