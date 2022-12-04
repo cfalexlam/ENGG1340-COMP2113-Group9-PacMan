@@ -96,6 +96,12 @@ bool MainGame::mainLoop()
                 if (player.getLives() == 0) 
                 {
                     // Ends the game when player loses all his lives
+                    clear();
+                    printw("Score: %d\n",player.getScore());
+                    printw("Lives: %d\n",player.getLives());
+                    printw("Strong: %d\n",maze.pacman.strong);
+                    printw("Total: %d\n",maze.food);
+                    maze.printMaze();
                     screen.printLoseScreen(player);
                     screen.keyboardModeWB();
                     int input;
