@@ -187,7 +187,7 @@ void savemap(vector<vector<char> > maze,string filename) {
     fout.close();
 }
 
-void fill(int row,int col,vector<vector<char>> &maze)
+void fill(int row,int col,vector<vector<char> > &maze)
 {
     if (row<0 || row>=maze.size() || col < 0 || col>= maze[0].size())
         return;
@@ -200,7 +200,7 @@ void fill(int row,int col,vector<vector<char>> &maze)
     fill(row,col-1,maze);
 }
 
-bool mazeIsConnected(vector<vector<char>> maze)
+bool mazeIsConnected(vector<vector<char> > maze)
 {
     for (int row = 0 ; row < maze.size() ; row++)      //check maze is connected
         for (int col = 0 ; col < maze[0].size() ; col++)
@@ -231,7 +231,7 @@ void printmap(vector< vector<char> > map,int pointerRow, int pointerCol)
     }
 }
 
-int GetSymbolNumber(vector<vector<char>> maze,char symbol){
+int GetSymbolNumber(vector<vector<char> > maze,char symbol){
     int count=0;
     for(int i = 0; i < maze.size(); i++) 
         for (int j=0; j<maze[0].size(); j++) 
