@@ -2,6 +2,10 @@
 Group project for ENGG1340/COMP2113 
 
 ## Team members (Group 9)
+* Guo Tsz Wang
+* Lam Cheuk Fung Alex
+* Mak Wan Sing
+* Tse Yun Lam
 
 ## About the game
 
@@ -10,11 +14,17 @@ Pacman, originally called Puck Man in Japan, is a legendary and classic maze act
 ## Game rules
 
 1. The player starts a game by entering the player name and the file name of the map in the terminal.
+
 2. The player can choose pre-designed maps or self-made maps.
+
 3. When the game starts, the player can use arrow keys (↑↓←→) in the keyboard to control the Pacman.
+
 4. The player loses 1 life each time he/she is caught by the ghost.
+
 5. Eating the pellet boosts the pacman to 50 strength. The player can then eat the ghosts until the strength level drops to 0.
+
 6. The player wins the game by eating all the dots in the map.
+
 7. The player loses the game when he/she loses all 3 lifes.
 
 
@@ -45,8 +55,11 @@ Pacman, originally called Puck Man in Japan, is a legendary and classic maze act
 
 ## Compilation and execution instruction
 1. Navigate to the src directory by the command "cd src"
+
 2. Compile the game by the command "make main"
+
 3. Execute the game by the command "./main"
+
 4. Clean the object codes by the command "make clean"
 
 ## Demonstration of gameplay
