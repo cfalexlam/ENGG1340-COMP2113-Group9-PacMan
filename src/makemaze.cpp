@@ -40,11 +40,13 @@ void makemaze(){
     while(1)
     {
         clear();
-        printw("Rules:\n1. Use up down left right to control the place to insert character.\n");
-        printw("2. Type G, X, O and = to insert ghosst, player, pellets and walls respectively.\n");
+        printw("Rules:\n1. Use arrow keys to navigate to insert characters.\n");
+        printw("2. Type G, X, O and = to insert ghosts, player, pellets and walls respectively.\n");
         printw("3. Press backspace to delete the inserted characters \n");
-        printw("4. Press s to save and quit \n");
-        printw("5. Press q to quit \n");
+        printw("4. Press n to insert a row and j to delete a row \n");
+        printw("5. Press m to insert a column and k to delete a column \n");
+        printw("6. Press s to save and quit \n");
+        printw("7. Press q to quit \n");
         printmap(maze,pointerRow,pointerCol);
         input = getch();
 
