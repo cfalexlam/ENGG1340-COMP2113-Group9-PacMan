@@ -83,10 +83,7 @@ bool MainGame::mainLoop()
         // Update velocities of ghosts if it moves towards a wall, or has a velocity of {0, 0}
 
         for (int i=0; i<maze.ghosts.size(); i++)
-            if ((maze.ghosts[i].getCurrentVelocity()[0] == 0 && maze.ghosts[i].getCurrentVelocity()[1] == 0) ||
-                (maze.isWall(maze.ghosts[i].getPresumedPosition()[0],maze.ghosts[i].getPresumedPosition()[1]))) {
-                    maze.ghosts[i].setRandomVelocity();    
-                }
+                maze.ghosts[i].setRandomVelocity();    
         
         // Check if pacman is bumping into any of the ghosts
         for (int i = 0; i < maze.ghosts.size(); i++) 
@@ -126,9 +123,10 @@ bool MainGame::mainLoop()
         // Update score and pacman state when a power pellet is eaten
         for (int i=0;i<maze.pellets.size();i++)
         	if (maze.pellets[i].getPosition()[0] == maze.pacman.getPresumedPosition()[0] &&
-        	    maze.pellets[i].getPosition()[1] == maze.pacman.getPresumedPosition()[1])
+        	    maze.pellets[i].getPosition()[1] == maze.pacman.getPresumedPosition()[1] && maze.pellets[i].exist)
                 {
                     maze.pacman.strong = 50;
+                    maze.pellets[i].exist = false;
                 }
              		
 
@@ -142,6 +140,12 @@ bool MainGame::mainLoop()
         // A player wins a level when its score == # of food (?)
         if (player.getScore() == maze.food)
         {
+            clear();
+            printw("Score: %d\n",player.getScore());
+            printw("Lives: %d\n",player.getLives());
+            printw("Strong: %d\n",maze.pacman.strong);
+            printw("Total: %d\n",maze.food);
+            maze.printMaze();
             screen.printWinScreen(player);
             screen.keyboardModeWB();
             int input;
