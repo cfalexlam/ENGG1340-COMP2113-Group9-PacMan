@@ -32,29 +32,18 @@ class Maze{
         bool isGhost(int row, int col);
         bool isFood(int row, int col);
 
-        // Print the maze (can consider moving this function to the screenrenderer class)
+        // Print the maze
         void printMaze();
 
         // Update position of pacman
         void movePacman(int* currentPosition, int* presumedPosition);
         void moveGhost();
-
-
         
         // Restart the game while keeping the dots; respawn the ghosts and pacman at their spawnpoints
         void respawnSameLevel();
-
         void respawnGhost(Ghost &ghost);
 
-        // Update position of entities (TBC)
-        void updatePos();
-
-        // Update states of entities (TBC)
-        void updateStates();
         int food=0;
-    private:
-        // Store number of food
-        
 };
 
 #endif

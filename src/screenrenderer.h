@@ -17,7 +17,6 @@ class ScreenRenderer {
         
         void printLoseScreen(Player player);
         void printWinScreen(Player player);
-        void printRespawnCountdown();
 };
 
 #endif

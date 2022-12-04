@@ -25,7 +25,10 @@ MainGame::MainGame(string filename)
 bool MainGame::mainLoop() 
 {
     /*
-        Runs the main game loop.
+        Function: Runs the main game loop.
+        Input: None
+        Output: A boolean value, where true implies the restart of the game loop,
+                and false indicates the end of the game loop.
     */
 
     // Set random seed
@@ -34,7 +37,7 @@ bool MainGame::mainLoop()
     // Initialize screen renderer
     ScreenRenderer screen;
     Player player;
-    Maze maze("../map/"+filename);
+    Maze maze("../maze/"+filename);
     
     screen.keyboardModeOpen();
     screen.keyboardModeWB();
@@ -137,7 +140,7 @@ bool MainGame::mainLoop()
         // Update position stored in the pacman object
         maze.pacman.setCurrentPosition(maze.pacman.getPresumedPosition()[0],maze.pacman.getPresumedPosition()[1]);
 
-        // A player wins a level when its score == # of food (?)
+        // A player wins a level when its score == # of food
         if (player.getScore() == maze.food)
         {
             clear();
@@ -166,6 +169,11 @@ bool MainGame::mainLoop()
     return false;
 }
 bool collision(Ghost& ghost, Pacman& pacman) {
+    /*
+        Function: Checks if there is any collision between the pacman and any of the ghosts.
+        Input: A ghost object and a pacman object, passed by reference
+        Output: A boolean value, where true implies collision and false otherwise.
+    */
     return ( (ghost.getPresumedPosition()[0] == pacman.getPresumedPosition()[0] && ghost.getPresumedPosition()[1] == pacman.getPresumedPosition()[1])
     	     || ( (ghost.getPresumedPosition()[0] == pacman.getCurrentPosition()[0] && ghost.getPresumedPosition()[1] == pacman.getCurrentPosition()[1])
     	   	     && ( (pacman.getPresumedPosition()[0] == ghost.getCurrentPosition()[0] && pacman.getPresumedPosition()[1] == ghost.getCurrentPosition()[1])

@@ -3,6 +3,7 @@
 
 #include <string>
 using namespace std;
+
 // Perform all main game-related functions
 class MainGame{
     public:

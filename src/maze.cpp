@@ -11,7 +11,14 @@ char SPACE = ' ';
 char GHOST = 'Q';
 char PELLETS = 'O';
 
+
 Maze::Maze(std::string filename) {
+    /*
+        Function: Constructer of maze. It read in text file to locate and create the ghost, pellet and player,
+        and input the data into vector map.
+        Input: The file save in "../map"
+        Output: Output nothing
+    */
     std::ifstream fin;
     fin.open(filename); 
 
@@ -75,6 +82,7 @@ Maze::Maze(std::string filename) {
         i += 1;
     }
 
+    // udate food amount by deleting the space occupied by pellet, ghost and player
     for (int i = 0; i < pellets.size(); i++) 
         maze[pellets[i].getPosition()[0]][pellets[i].getPosition()[1]] = PELLETS;
     food -= pellets.size();
@@ -89,6 +97,11 @@ Maze::Maze(std::string filename) {
 
 void Maze::printMaze()
 {
+    /*
+        Function: Print the maze to screen
+        Input: Do not require input, but it will use the map constructed
+        Output: Ouput map to screen
+    */
     for (int row = 0; row < maze.size(); row++) {
         for (int col = 0; col < maze[0].size(); col++)
             printw("%c ", maze[row][col]);
@@ -98,12 +111,22 @@ void Maze::printMaze()
 
 void Maze::movePacman(int* currentPosition, int* presumedPosition)
 {
+    /*
+        Function: Move the pacman
+        Input: The current position and the presume position of pacman
+        Output: Nothing will be outputted, but it will update pacman position
+    */
     maze[currentPosition[0]][currentPosition[1]] = SPACE;
     maze[presumedPosition[0]][presumedPosition[1]] = PLAYER;
 }
 
 void Maze::moveGhost()
 {
+    /*
+        Function: Move the ghost
+        Input: Nothing will be inputed, but it will use the ghost object declare in constructer
+        Output: Nothing will be outputted, but it will update ghost's position
+    */
     for (int i=0; i<ghosts.size(); i++)
         maze[ghosts[i].getCurrentPosition()[0]][ghosts[i].getCurrentPosition()[1]] = ghosts[i].liftedObject;
     
@@ -120,6 +143,11 @@ void Maze::moveGhost()
 }
 
 void Maze::respawnGhost(Ghost &ghost)
+    /*
+        Function: Respawn the ghost when it is hit by player and put it back to its original position
+        Input: The ghost object
+        Output: Nothing will be outputted, but it will update ghost's position
+    */
 {
     maze[ghost.getCurrentPosition()[0]][ghost.getCurrentPosition()[1]] = ghost.liftedObject;
     ghost.liftedObject = ' ';
@@ -130,6 +158,11 @@ void Maze::respawnGhost(Ghost &ghost)
 
 void Maze::respawnSameLevel()
 {
+    /*
+        Function: Respawn the player when it is hit by ghost and put it back to its original position
+        Input: Nothing, but it will use the pacman object declare in constructer
+        Output: Nothing will be outputted, but it will update ghost's position
+    */
     movePacman(pacman.getCurrentPosition(),pacman.initPosition);
     pacman.setCurrentPosition(pacman.initPosition[0], pacman.initPosition[1]);
     pacman.setCurrentVelocity(0, 0);
@@ -149,15 +182,30 @@ void Maze::respawnSameLevel()
 
 bool Maze::isWall(int row, int col) 
 {
+    /*
+        Function: Check whether the location is a wall
+        Input: The row and col of the map
+        Output: Return ture if the location is a wall, vice versa
+    */
     return maze[row][col] == WALL;
 }
 
 bool Maze::isGhost(int row, int col) 
 {
+    /*
+        Function: Check whether the location is a ghost
+        Input: The row and col of the map
+        Output: Return ture if the location is a ghost, vice versa
+    */
     return maze[row][col] == GHOST;
 }
 
 bool Maze::isFood(int row, int col) 
 {
+    /*
+        Function: Check whether the location is a food
+        Input: The row and col of the map
+        Output: Return ture if the location is a food, vice versa
+    */
     return maze[row][col] == FOOD;
 }
