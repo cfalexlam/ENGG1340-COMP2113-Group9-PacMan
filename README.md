@@ -2,10 +2,10 @@
 Group project for ENGG1340/COMP2113 
 
 ## Team members (Group 9)
-*Guo Tsz Wang
-*Lam Cheuk Fung Alex
-*Mak Wan Sing
-*Tse Yun Lam
+* Guo Tsz Wang
+* Lam Cheuk Fung Alex
+* Mak Wan Sing
+* Tse Yun Lam
 
 ## About the game
 
