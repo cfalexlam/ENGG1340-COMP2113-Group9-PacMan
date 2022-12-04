@@ -41,6 +41,8 @@ Pacman, originally called Puck Man in Japan, is a legendary and classic maze act
 
 ## List of non-standard C/C++ libraries included
 
+* Ncurses
+
 ## Compilation and execution instruction
 1. Navigate to the src directory by the command "cd src"
 2. Complie the game by the command "make main"
