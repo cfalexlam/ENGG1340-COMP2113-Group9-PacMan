@@ -3,6 +3,7 @@
 
 #include <string>
 
+using namespace std;
 
 class Player;
 
@@ -12,13 +13,11 @@ class ScreenRenderer {
         void keyboardModeWB();
         void keyboardModeNB();
         void keyboardModeClose();
-        void keyboardModePrint(std::string message);
+        void keyboardModePrint(string message);
         
-        void printLoseScreen(Player pl);
-        void printWinScreen(Player pl);
+        void printLoseScreen(Player player);
+        void printWinScreen(Player player);
         void printRespawnCountdown();
-
-        std::string takeCmdInput(std::string promptMessage);
 };
 
 #endif

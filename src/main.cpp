@@ -62,7 +62,8 @@ void printFile(const string& fileName) {
     fin.close();
 }
 
-// get the map list in the map directory
+// Get the file list in the map directory
+// from https://stackoverflow.com/questions/306533/how-do-i-get-a-list-of-files-in-a-directory-in-c
 vector<string> getMapList() {
   vector<string> MapList;
   if (auto dir = opendir("../map/")) {
@@ -77,7 +78,7 @@ vector<string> getMapList() {
   return MapList;
 }
 
-// choose a map from the maplist
+// Choose a map from the maplist
 string chooseMap(vector<string> MapList) {
   // Print the map list
   system("clear");
@@ -87,11 +88,12 @@ string chooseMap(vector<string> MapList) {
   }
   cout << endl;
 
+  // Input the filename of the map
   string filename;
   while (true) {
     cout << "Which map you want to load? Please type the file name." << endl;
     cin >> filename;
-	// Check if the input is in the map list
+	  // Check if the input is in the map list
     for (int i = 0; i < MapList.size(); i++) {
       if (filename == MapList[i]) {
         return filename;
