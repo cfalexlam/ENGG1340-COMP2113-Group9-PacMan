@@ -25,21 +25,17 @@ Pacman, originally called Puck Man in Japan, is a legendary and classic maze act
 ## Features implemented
 1.  Generation of random game sets or events
     * The next move of ghost is randomly generated using random seeds.
-
 2.  Data structures for storing game status
     * Custom classes are implemented to partition the program into smaller bits and bundling functional parts together for modularization and effective problem solving.
         1. The player's status is represented by the Player class.
         2. The pacman and ghosts states are represented by the Pacman and Ghost classes respectively.
         3. MainGame, ScreenRenedrer and Map exist as utility classes that constitute the core game logic and functions.
-
 3.  Dynamic memory management
     * Vectors are used in the maze class to store the positions of the pacman, ghosts and walls.
     * A dynamically allocated integer array is used to store the player's scores in each difficulty level.
-
 4.  File I/O (e.g. for loading or saving game status)
     * For file input, text files which contain the structure of the maze is loaded during initialization of the game. A player can also choose to load exisiting saves.
     * For file output, when mode m is choosen, player are allowed to create a map on their own and save the map for later use. 
-
 5.  Program codes in multiple files
     * The program's code is partitioned into multiple .cpp and header files, according to classes.
 
