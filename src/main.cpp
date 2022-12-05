@@ -34,7 +34,8 @@ int main() {
         {
             printFile("../templates/gamerule.txt");
             takeCmdInput("Enter any key to quit");
-        } else if (command == "m") {
+        } else if (command == "m") // enter map creation mode
+        {
             makemaze();
         }
     } while (command != "q");
@@ -53,7 +54,7 @@ void printStartMenu() {
 }
 
 /*
-  Ask for user input with prompt
+  Function: Ask for user input with prompt
   Input: a string of prompt
   Output: a string of user input
 */
@@ -65,7 +66,7 @@ string takeCmdInput(string prompt) {
 }
 
 /*
-  Print the content of the file
+  Function: Print the content of the file
   Input: a string of file name
   Output: None
 */
@@ -83,7 +84,7 @@ void printFile(const string & fileName) {
 }
 
 /*
-  Get the file list in the map directory
+  Function: Get the file list in the map directory
   Input: None
   Output: a string vector with file names as elements
 */
